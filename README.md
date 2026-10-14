@@ -16,6 +16,14 @@
 | [Server](#server) | 온라인 서버 구성과 접속·인증·영속화 |
 | [Data](#data) | DataForge와 게임 데이터 변환·검증 |
 
+## Production Philosophy
+
+**Creator designs and owns the outcome. AI Agent implements and runs baseline regression checks. Programmer reviews engineering quality across closed issues and evolves the workflow.**
+
+Creator는 특정 직군이 아니라 설계와 실제 결과를 책임지는 제작자입니다. 개별 이슈의 구현·기본 검증은 Agent가 수행하고, Programmer는 완료된 이슈를 묶어 구조적·기능적 품질과 반복 문제를 점검합니다. 검토 결과는 리팩터링과 Workflow·Skill·Guideline 개선으로 환원합니다.
+
+- [Creator-Centric Production Engineering](Docs/CreatorCentricProduction.md) — 역할과 책임, 완료 이슈 기반 품질 관리, 장기 확장 방향
+
 ## Workflow
 
 요청을 실행 가능한 작업으로 나누고, 최신 상태와 검증 근거를 바탕으로 다음 행동을 결정합니다.
