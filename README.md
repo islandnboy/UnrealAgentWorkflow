@@ -40,6 +40,7 @@ Creator는 특정 직군이 아니라 설계와 실제 결과를 책임지는 �
 | [Execution Model](Docs/ExecutionModel.md) | 최신 상태 확인, 작업 분리, Step 실행과 완료 판정 |
 | [Creator Workflow](Docs/CreatorWorkflow.md) | 제작자의 요청, 직접 제작·검토·수정, 다음 작업 연결 |
 | [Designer Production](CaseStudies/DesignerProduction.md) | 기획 의도를 제작 계약과 결과 검증으로 연결한 사례 |
+| [Agent-Driven Game Production 사례](CaseStudies/AgentDrivenGameProduction.md) | 월드·전투·MetaHuman 제작 과정, 실제 화면과 데이터 연결 구조 |
 | [Execution Observability](Reference/ProjectSF/ExecutionObservability.md) | 실행 상태와 검증 근거를 기록하는 방식 |
 | [Context Budget Policy](Reference/ProjectSF/ContextBudgetPolicy.md) | 필요한 문맥을 선택하고 확장하는 기준 |
 | [Designer Artifact Set](Samples/DesignerArtifactSet.md) | 제작자와 Agent가 공유하는 제작 산출물 예시 |

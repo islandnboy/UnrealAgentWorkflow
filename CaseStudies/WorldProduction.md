@@ -68,3 +68,7 @@ Water actor 생성만으로 완료 처리하지 않고 실제 지형, 수심, �
 대규모 World 제작에서 AI의 가치가 커지려면 한 번의 생성 품질보다 **입력, 수정, 재생성, 검증, 사람이 이어서 편집하는 흐름**이 유지되어야 합니다.
 
 이 Case Study는 그 제작 계약을 실제 ProjectSF World 작업에서 계속 다듬는 R&D입니다.
+
+## Screenshots and workflow example
+
+[Agent-Driven Game Production 사례](AgentDrivenGameProduction.md#월드-제작-파이프라인을-만들고-실제-지역에-적용)에서 월드 제작 공정, 도로 전후 화면, 지역 rough와 검증 경계를 함께 확인할 수 있습니다.
