@@ -26,6 +26,18 @@ ProjectSF가 제품 구현과 운영 계약의 Source of Truth이며, 이 저장
 | Creator Feedback | 화면에 남은 도로 접합 틈과 원거리 가림을 발견하고 국소 수정 또는 rough 한계 수용 판단 |
 | Workflow Improvement | 불확실한 mutation 자동 재실행 방지, 기존 결과 변화 감지, 재사용 가능한 profile·batch·검증 계약 정비 |
 
+#### 공간 분할과 도메인 레이어
+
+World Partition의 로드·저장 구조, 행정구역별 제작 범위, 지형·수계·도로의 도메인 책임, batch 청크를 별도로 추적한다. 행정구역과 streaming cell을 같은 경계로 고정하지 않고, 구역을 가로지르는 도로·수계의 feature identity와 생성 owner를 유지한다.
+
+지형은 Base와 수계 굴착·basin·호안 보정 Landscape Edit Layer를 분리한다. 수계는 지형 준비와 Native River/Lake·WaterZone을, 도로는 기반 도로면과 차선·보도를 분리한다. 생성물만 선택해 수정하고 기존 지형·수작업·공유 도로·수계를 보호한다.
+
+![공간 분할과 제작 소유권](AgentDrivenGameProduction/world-spatial-structure.png)
+
+![지형 수계 도로의 레이어 구조](AgentDrivenGameProduction/world-domain-layers.png)
+
+위 그림은 확인한 계약·저장 검증에 근거한 설명 도식이다. 모든 제작 레이어를 Unreal Data Layer로 구현했다고 해석하지 않는다. [월드 사례의 공간 분할과 레이어 구조](WorldProduction.md#공간-분할과-레이어-구조)에서 각 경계와 부분 수정·검증 책임을 확인할 수 있다.
+
 ![GIS부터 월드 제작과 검증으로 이어지는 연결 구조](AgentDrivenGameProduction/world-structure.png)
 
 그림 1. 실제 문서·도구를 기준으로 정리한 공정 도식. 지형·도로·수계 입력과 검증 책임을 연결한다. Unreal Editor 화면 캡처와 구분한다.
