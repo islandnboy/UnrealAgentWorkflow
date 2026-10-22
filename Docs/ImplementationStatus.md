@@ -18,6 +18,7 @@
 
 | 분야 | 확인된 설계·구현 및 과거 검증 | 남은 범위 |
 | --- | --- | --- |
+| [SF Team Hub](../CaseStudies/TeamHubProduction.md) | Issue·Spec 병행 경로와 SPEC-74 R3 CURRENT 발행. 공개 v133 기록: **구현 20개 완료, 기술 검증 18개 PASS, 제작자 수락** | 팀원 개인 계정·모바일 쓰기 미검증, #87 설계 개편 미완료 |
 | [RPCNet](../CaseStudies/RPCNet.md) | Runtime·Session·Transport·Codec, C# ProtocolGenerator, Consumer Integration. **당시 테스트 37개 및 Unreal 상호운용성 PASS** | 대규모 실서비스 latency/throughput 개선 수치 없음 |
 | [Online Server](../CaseStudies/ServerProduction.md) | Gateway/AS/GS, 영속 Player/World, Local UE Login→PlayerScope. Foundation **52개**, Gateway 배포 **58개** 회귀 PASS는 **서로 다른 검증 시점** | Unreal DS Gameplay replication, Public TLS/WAN UE Client, 운영 HA/RDB 미완료 |
 | [DataForge](../CaseStudies/DataForge.md) | XLSX DataTable·Unreal Bake/Readback·Server JSON Parity. **당시 Core 25개 PASS** | 고급 타입·실제 모든 제작 소비자 전환 미완료 |
@@ -32,6 +33,6 @@
 - 새 선형 탐험형 월드의 제작·성능 검증 (이전 GIS 근거와 구분)
 - 월드 변경 보호 Gate의 완전한 Runtime 연동 (2026-10-13 문서에 UNIMPLEMENTED)
 - DataForge 고급 Adapter·실제 소비자 전체 전환
-- 계정 간 Team Hub Spec 쓰기와 실제 배포 권한 검증
+- 팀원별 개인 ChatGPT 계정·모바일 환경에서 Team Hub Spec 쓰기와 배포 권한 검증
 - 동일 조건의 토큰·시간·인력 절감 효과 측정
 - Public/WAN Unreal Client 및 운영 수준 다중 지역 서버 배포

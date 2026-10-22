@@ -97,3 +97,13 @@
 - `ServerProduction.md`는 원본 서버 아키텍처·클라이언트 로그인·배포 문서를 대조해 로컬 구현과 미검증 운영 범위를 사례별로 분리했습니다.
 - README는 Agent Workflow / RPCNet / 서버를 중심으로 축약하고 기타 자료는 보조 자료로 정리했습니다.
 - 코드·Unreal Editor·실서버 및 회귀 테스트를 새로 실행하지 않았습니다. 이 정리는 새로운 기능 완료 또는 검증 판정이 아닙니다.
+
+
+## 2026-10-23 Team Hub 사례 및 미완료 항목 정리
+
+- ProjectSF `main` `08715c68b04f`를 다시 조회했고 기준 커밋의 추가 변경은 없음을 확인했습니다.
+- `Docs/Development/AgentWorkflow/SFTeamHubAgentAPI.md`, `CommonAIWorkflow.md`, `sf-page-tools/SKILL.md`, `discussion-convergence/SKILL.md`와 공개 GitHub Issue #74·#92·#87·#93의 당시 기록을 대조했습니다.
+- `CaseStudies/TeamHubProduction.md`에는 Team Hub의 **SPEC-74 R3 CURRENT 발행**과 당시 구현·검증·제작자 수락 기록을 추가했습니다. 배포·검증 수치는 2026-10-19~21 기록이며 이번 문서 편집에서 재실행하지 않았습니다.
+- 프로젝트에서 Issue 제작이 폐기된 것은 아니며, Spec 제작과 직접 요청은 병행합니다. #87의 설계 개선과 #93의 개인 플러그인 배포는 미완료로 분리했습니다.
+- `AgentDrivenGameProduction.md`의 **여주인공 #29(미완료 제작 계약)** 언급은 결과 사례에서 제거했습니다. 기본 몬스터 #28은 기술적 검증 기록이 있는 범위만 남기고 전체 작업 완료를 주장하지 않습니다.
+- 비공개 Spec 본문·인증정보·개인 식별이 가능한 내부 증거는 복사하지 않았습니다. Team Hub 사이트의 현재 화면·앱별 동작은 이번 갱신에서 직접 검증하지 않았습니다.

@@ -30,7 +30,8 @@ Creator 목표 / 설계 / Acceptance
 | Agent Workflow | [제작 모델과 역할](Docs/CreatorCentricProduction.md) | Creator / AI Agent / Programmer의 책임과 품질 관리 |
 | Agent Workflow | [구조 및 책임 경계](Docs/Architecture.md) | Workflow·Rule·Skill·Recipe·Runtime·Evidence |
 | Agent Workflow | [실행·재개·검증](Docs/ExecutionModel.md) | Issue / Spec / 직접 요청, 최신 원본, 완료 판정 |
-| 제작 사례 | [실제 Unreal 제작](CaseStudies/AgentDrivenGameProduction.md) | 월드·전투·MetaHuman 작업과 단계별 검증 기록 |
+| 제작 사례 | [SF Team Hub 전환](CaseStudies/TeamHubProduction.md) | Issue·Spec 병행, 버전·승인 경계, SPEC-74 실제 완료 사례 |
+| 제작 사례 | [실제 Unreal 제작](CaseStudies/AgentDrivenGameProduction.md) | 검증 기록이 있는 월드·전투·기본 몬스터 제작 단계 |
 | RPCNet | [네트워크 설계 및 검증](CaseStudies/RPCNet.md) | Runtime·ProtocolGenerator·Consumer 책임 분리와 Unreal 연동 |
 | Online Server | [서버 구현 사례와 현재 범위](CaseStudies/ServerProduction.md) | Gateway/AS/GS, 영속화, 로그인·접속 흐름, 로컬 검증 |
 
