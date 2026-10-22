@@ -1,20 +1,20 @@
-# Architecture
+# 구조와 책임 경계
 
-**2026-10-22 snapshot:** ProjectSF `main` `08715c68b04f`. 이는 공개용 설명이며 독립 실행형 프레임워크가 아닙니다. **Standard First, Simple is Best**를 따릅니다.
+**2026-10-22 기준 Snapshot:** ProjectSF `main` `08715c68b04f`. 이는 공개용 설명이며 독립 실행형 프레임워크가 아닙니다. **Standard First, Simple is Best**를 따릅니다.
 
 현재 Agent Workflow의 구조는 ProjectSF에서 실제 운영 중인 Agent Workflow를 기준으로 합니다.
 
-## 1. Repository entry
+## 1. 저장소 진입점
 
 실제 ProjectSF 작업은 원본 저장소 루트의 `AGENTS.md`에서 시작합니다.
 
 `AGENTS.md`는 거대한 정책 문서가 아니라 다음 역할만 가집니다.
 
-- Repository identity
-- mandatory bootstrap gate
-- Workflow / Rule / Skill routing
+- 저장소 식별
+- 필수 진입 확인
+- Workflow / Rule / Skill 선택 경로
 - 하위 영역별 지침 연결
-- mutation 이전에 확인해야 할 최소 실행 문맥
+- 변경 전에 확인해야 할 최소 실행 문맥
 
 ~~~text
 AGENTS.md
@@ -31,9 +31,9 @@ Production/Data + Production/Evidence
 
 Codex의 repository Skill 자동 발견을 위해 `.agents/skills/<name>/SKILL.md`를 얇은 entrypoint로 두고, 실제 Skill 원본은 `AI/Skills/<name>/SKILL.md`가 소유합니다.
 
-## 2. Responsibility boundaries
+## 2. 책임 경계
 
-| Layer | Owns | Does not own |
+| 구성 요소 | 담당 범위 | 담당하지 않는 범위 |
 | --- | --- | --- |
 | `AGENTS.md` | bootstrap, routing | 제품 설계, 도구 구현 |
 | `AI/Workflows` | 실행 상태, 재개, Step 전환, 완료 판정 | 제품 고유 규칙 |
@@ -48,11 +48,11 @@ Codex의 repository Skill 자동 발견을 위해 `.agents/skills/<name>/SKILL.m
 | Direct request | 영속 일감 불필요한 현재 요청의 승인 범위 | Issue/Spec 자동 생성 |
 | `Docs` | 제품·기술·제작 설계 | Agent runtime state |
 
-## 3. Agent vs Runtime
+## 3. AI Agent와 Runtime의 역할
 
 이 구조에서 가장 중요한 경계입니다.
 
-### Agent
+### AI Agent
 
 Agent가 판단합니다.
 
@@ -79,7 +79,7 @@ Runtime은 Agent 판단을 실행 가능한 형태로 검증합니다.
 
 과거의 keyword 기반 Prompt Compiler가 자연어 의미를 대신 판단하는 구조는 현재 모델의 중심이 아닙니다.
 
-## 4. Current workflow set
+## 4. 현재 Workflow 구성
 
 ### CommonAIWorkflow
 
@@ -126,7 +126,7 @@ Production 중 드러난 제작 기반 결함을 해결합니다.
 
 작업자가 현재 Agent의 선택과 실행 상태를 확인할 수 있도록 화면 Trace를 정의합니다.
 
-## 5. Current Skill model
+## 5. 현재 Skill 모델
 
 Skill은 직군 분업 단위가 아니라 **반복 가능한 전문 판단 단위**입니다.
 
@@ -152,7 +152,7 @@ ProjectSF의 현재 예:
 
 하나의 Goal은 여러 Skill을 Step별로 조합할 수 있습니다.
 
-## 6. Persistent context
+## 6. 지속 작업 문맥
 
 대화 기억을 장기 상태 저장소로 사용하지 않습니다.
 

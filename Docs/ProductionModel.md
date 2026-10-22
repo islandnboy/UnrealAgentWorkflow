@@ -1,8 +1,8 @@
-# Production Model
+# 제작 모델
 
 이 문서는 ProjectSF의 운영 원리를 공개용으로 설명하며, 별도의 범용 실행 프레임워크를 정의하지 않습니다.
 
-## Human + AI shared production
+## 사람과 AI가 공유하는 제작 공정
 
 ProjectSF에서는 사람과 AI를 서로 다른 제작 파이프라인으로 분리하지 않습니다.
 
@@ -16,9 +16,9 @@ Approved Input
 → Human or AI continues
 ~~~
 
-## Data / Recipe / Tool / Evidence
+## Data / Recipe / Tool / Evidence 책임 구분
 
-### Production Data
+### 제작 입력 데이터
 
 `Production/Data`는 현재 제작이 실제 사용하는 승인 입력을 소유합니다.
 
@@ -62,7 +62,7 @@ AI는 방법을 판단하고, 반복 가능한 기계적 실행은 Tool에 넘�
 
 Goal과 Current State를 Evidence 폴더에 복제하지 않습니다. Issue 경로는 GitHub Issue, Spec 경로는 Team Hub, 직접 작업은 현재 요청이 범위·승인 원본입니다.
 
-## Progressive convergence
+## 단계적 품질 수렴
 
 제품 제작은 가능한 한 연결된 전체를 유지하며 반복 개선합니다.
 
@@ -89,7 +89,7 @@ Goal
 
 이때 Production을 포기하거나 임시 우회로를 고착시키지 않고 필요한 제작 기반을 최소 범위에서 개선한 뒤 원래 Step으로 복귀합니다.
 
-## Promotion rule
+## 공용 기반으로 승격하는 기준
 
 반복 제작을 시스템화하는 기준은 “두 번 나왔다” 같은 횟수 자체가 아닙니다.
 

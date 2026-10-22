@@ -1,4 +1,4 @@
-# Creator Workflow
+# Creator 제작 흐름
 
 현재 작업 경로는 **Issue / Team Hub Spec / 직접 요청**입니다. 동일한 제작·검증 원칙을 공유하지만 기록과 승인 원본은 각기 다릅니다. GPT 계획과 Codex 구현은 자동으로 이어지지 않으며 실제 연결된 도구의 권한에 따릅니다.
 
@@ -39,7 +39,7 @@ Agent는 이 요구를 현재 Repository / Issue / Workflow와 대조해 실행 
 
 ---
 
-## 2. 공용 제작 Loop
+## 2. 공용 제작 순환
 
 사람과 Agent는 서로 다른 공정을 쓰지 않습니다.
 
@@ -100,7 +100,7 @@ Creator는 모든 내부 실행 로그를 읽을 필요가 없습니다.
 
 ---
 
-## 4. Agent의 책임
+## 4. AI Agent의 책임
 
 Agent는 Creator의 의도를 구현 가능한 작업으로 연결합니다.
 
@@ -128,7 +128,7 @@ Agent는 다음을 대신 판단합니다.
 
 ---
 
-## 5. 직접 제작도 같은 Workflow다
+## 5. 사람의 직접 제작도 같은 흐름이다
 
 Creator가 Unreal Editor나 외부 Tool에서 직접 수정하는 것도 예외 경로가 아닙니다.
 
@@ -156,7 +156,7 @@ Agent Result
 
 ---
 
-## 6. Creator-facing Tool
+## 6. Creator가 사용하는 제작 도구
 
 모든 반복 작업을 자연어 Agent 요청으로 처리할 필요는 없습니다.
 
@@ -181,7 +181,7 @@ DataAsset과 Config는 각각 Unreal native source를 유지하며 DataForge에�
 
 ---
 
-## 7. Production Artifact
+## 7. 제작 산출물
 
 Creator와 Agent가 공유하는 제작 정보는 대화에만 남지 않습니다.
 
@@ -228,7 +228,7 @@ Creator Acceptance
 
 ---
 
-## 9. Portfolio에서 보여주는 것
+## 9. 포트폴리오에서 보여주는 것
 
 Creator Workflow의 포트폴리오 단위는 “Agent 기능”이 아닙니다.
 

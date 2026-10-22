@@ -1,8 +1,8 @@
-# Execution Model
+# 실행 모델
 
 **Entry:** Issue (경량 제작), SF Team Hub Spec (플랜·설계·합의), 직접 작업 (영속 일감 불필요). 모든 작업에 Issue/Recipe 생성을 강제하지 않습니다.
 
-## 1. Mandatory bootstrap gate
+## 1. 실행 전 필수 확인
 
 실제 조사·진단·변경·제작 작업은 mutation 전에 실행 문맥을 먼저 확정합니다.
 
@@ -18,7 +18,7 @@
 
 필수 지침을 읽기 전에 구현을 먼저 시작하고 나중에 정당화하는 방식은 허용하지 않습니다.
 
-## 2. Current Source of Truth Gate
+## 2. 현재 원본 상태 확인
 
 모든 경로의 기준은 이전 세션이 아니라 **현재 시점의 실제 상태**입니다.
 
@@ -30,7 +30,7 @@ Repository + Workflow
 
 확인 범위는 작업에 필요한 만큼만 확장합니다.
 
-### Repository
+### 저장소
 
 - branch / HEAD
 - dirty diff
@@ -38,7 +38,7 @@ Repository + Workflow
 - 관련 Evidence
 - 필요한 경우 실제 Unreal Editor 저장 상태
 
-### Issue
+### 이슈와 작업 원본
 
 - Issue: Goal / Scope / Acceptance / 최신 Creator 결정 / state / 관련 Evidence
 - Spec: ID / Revision / Stage / Gate / 확정 Plan·설계·UML 버전
@@ -51,7 +51,7 @@ Repository + Workflow
 
 이전 대화와 handoff는 위치를 찾는 참고 자료일 뿐, 현재 계약을 대체하지 않습니다.
 
-## 3. Resolve then expand
+## 3. 필요한 범위를 먼저 확인하고 확장
 
 Repository 전체를 먼저 읽지 않습니다.
 
@@ -63,7 +63,7 @@ Repository 전체를 먼저 읽지 않습니다.
 
 이 방식은 단순 token 절약이 아니라 **판단에 불필요한 context가 오히려 품질을 떨어뜨리는 문제**를 줄이기 위한 정책입니다.
 
-## 4. Issue / Recipe partition gate
+## 4. Issue / Recipe 분리 기준
 
 Issue/Recipe를 분리하기 전에 기존 계약을 확인합니다. Spec이나 직접 요청을 자동으로 Issue로 승격하지 않습니다.
 
@@ -76,7 +76,7 @@ Issue/Recipe를 분리하기 전에 기존 계약을 확인합니다. Spec이나
 
 새 Issue나 Recipe는 “작업량이 많다”는 이유가 아니라 **독립적인 Goal, Acceptance, lifecycle 또는 재사용 계약이 존재할 때**만 분리합니다.
 
-## 5. Step execution
+## 5. 단계 실행
 
 먼저 공식 엔진·플랫폼 기능과 기존 구현을 조사합니다. 새로운 추상화는 문제와 이점이 검증될 때만 도입합니다(**Standard First, Simple is Best**).
 
@@ -94,7 +94,7 @@ Restore current state
 
 Tool 호출 성공과 Step PASS는 별도입니다.
 
-## 6. Observability
+## 6. 실행 상태 관측
 
 진행 화면에서는 다음 연결이 보여야 합니다.
 
@@ -112,7 +112,7 @@ Issue / Request
 
 발견한 Tool 후보와 실제 호출한 Tool을 구분하고, 미확인 상태를 성공처럼 표현하지 않습니다.
 
-## 7. Task outcome
+## 7. 작업 결과
 
 대표 상태:
 
