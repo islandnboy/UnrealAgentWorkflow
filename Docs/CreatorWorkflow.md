@@ -44,19 +44,19 @@ Agent는 이 요구를 현재 Repository / Issue / Workflow와 대조해 실행 
 사람과 Agent는 서로 다른 공정을 쓰지 않습니다.
 
 ~~~text
-Creator Intent
+Creator의 제작 의도
    ↓
-Goal / Scope / Acceptance
+목표 / 범위 / 수용 기준
    ↓
-Issue / Spec / Direct request
+Issue / Spec / 직접 요청
    ↓
 Agent 또는 Creator Tool 실행
    ↓
 Game / Unreal 결과
    ↓
-Validation / Evidence
+검증 / 근거(Evidence)
    ↓
-Creator Review
+Creator 검수
    ├─ 승인
    ├─ 수정 요청
    └─ 직접 수정
@@ -105,7 +105,7 @@ Creator는 모든 내부 실행 로그를 읽을 필요가 없습니다.
 Agent는 Creator의 의도를 구현 가능한 작업으로 연결합니다.
 
 ~~~text
-Creator Request
+Creator 요청
 → Current Source of Truth 확인
 → Workflow / Step 판단
 → Rule / Skill / Recipe 선택
@@ -143,7 +143,7 @@ Creator가 Unreal Editor나 외부 Tool에서 직접 수정하는 것도 예외 
 - Excel 기반 밸런스 데이터 편집
 
 ~~~text
-Agent Result
+AI Agent 결과
 → Creator 직접 수정
 → Save
 → 현재 Production State
@@ -165,8 +165,8 @@ Agent Result
 대표 사례가 **DataForge**입니다.
 
 ~~~text
-Creator edits XLSX
-→ DataForge Refresh
+Creator가 XLSX 수정
+→ DataForge 상태 갱신(Refresh)
 → 변경 Dataset 확인
 → Build Selected / Build Changed
 → Unreal DataTable Bake
@@ -186,18 +186,18 @@ DataAsset과 Config는 각각 Unreal native source를 유지하며 DataForge에�
 Creator와 Agent가 공유하는 제작 정보는 대화에만 남지 않습니다.
 
 ~~~text
-Production
+제작 산출물
 ├─ Issue
 │  ├─ Goal
 │  ├─ Scope
 │  ├─ Requirements
 │  └─ Acceptance
 ├─ Recipe
-├─ Authoring Data
-├─ Result Artifact
-├─ Validation Evidence
-├─ Creator Review
-└─ Final Decision
+├─ 제작 입력 데이터
+├─ 결과 산출물
+├─ 검증 근거
+├─ Creator 검수
+└─ 최종 결정
 ~~~
 
 지속되는 Goal과 판단은 Issue에, 반복 가능한 제작 계약은 Recipe에, 실제 입력과 결과 검증은 Data / Evidence에 남깁니다.
@@ -209,11 +209,11 @@ Production
 다음 세 단계는 서로 다릅니다.
 
 ~~~text
-Tool Success
+도구 실행 성공
    ↓
-Technical Validation
+기술 검증
    ↓
-Creator Acceptance
+Creator 최종 수용
 ~~~
 
 예를 들어 Unreal Asset이 정상 생성되고 저장됐더라도:
@@ -233,9 +233,9 @@ Creator Acceptance
 Creator Workflow의 포트폴리오 단위는 “Agent 기능”이 아닙니다.
 
 ~~~text
-Problem
-→ Creator Intent
-→ Production Contract
+문제
+→ Creator 제작 의도
+→ 제작 계약
 → Agent / Creator Tool Execution
 → Actual Result
 → Validation

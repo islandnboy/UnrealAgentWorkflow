@@ -55,7 +55,7 @@ Server JSON       UE 빌드 JSON
                   결과 반영
 ~~~
 
-Client와 Server가 서로 다른 변환 로직을 가지지 않고 동일 normalized data 의미에서 파생됩니다.
+Client와 Server가 서로 다른 변환 로직을 가지지 않고 동일하게 정규화된 데이터에서 파생됩니다.
 
 ## DA / Config의 엔진 기반 조회
 
@@ -73,7 +73,7 @@ GConfig 엔진 기능으로 조회
 DataForge 조회 / 추출
 ~~~
 
-DataForge가 `.uasset` binary format이나 Unreal Config merge semantics를 Python으로 다시 구현하지 않습니다.
+DataForge는 `.uasset` 바이너리 형식이나 Unreal Config의 병합 규칙을 Python으로 직접 재구현하지 않습니다.
 
 Unreal이 자신의 데이터를 직접 해석하고 DataForge는 그 결과를 소비합니다.
 
@@ -97,11 +97,11 @@ GUI는 다음 작업을 제공합니다.
 - Diff / Results / Diagnostics — 변경 비교·결과·진단
 - Template / Migration 지원
 
-기획자는 Excel에서 데이터를 작성하고 DataForge에서 변경 대상을 확인한 뒤 필요한 dataset만 build할 수 있습니다.
+기획자는 Excel에서 데이터를 작성하고 DataForge에서 변경 대상을 확인한 뒤 필요한 데이터셋만 빌드할 수 있습니다.
 
 ## 증분 빌드
 
-Refresh가 전체 rebuild를 의미하지 않습니다.
+Refresh는 상태를 새로 확인하는 기능이며 전체 재빌드가 아닙니다.
 
 ~~~text
 Git이 찾은 변경 후보 파일
@@ -119,43 +119,43 @@ SchemaChanged / DependencyDirty /
 Removed / Invalid
 ~~~
 
-Git은 후보 범위를 줄이는 데 사용하고 최종 dirty 판정은 dataset semantic diff로 수행합니다.
+Git은 후보 범위를 줄이는 데 사용하고 최종 변경 여부는 데이터셋의 의미적 차이를 비교해 판단합니다.
 
-같은 workbook 안에서도 dataset 단위로 fingerprint를 계산합니다.
+같은 Workbook 안에서도 데이터셋마다 변경 판별 값을 계산합니다.
 
-`Build Changed`는 실제 영향받은 dataset과 필수 dependency만 처리합니다.
+`Build Changed`는 실제로 영향받은 데이터셋과 필수 의존성만 처리합니다.
 
 ## 안전한 결과 반영
 
-생성된 결과는 바로 publish하지 않습니다.
+생성된 결과를 곧바로 배포·반영하지 않습니다.
 
 ~~~text
 Build
 → PENDING_UE_PARITY
 → Unreal Bake
-→ separate Readback
-→ semantic parity
-→ promote Server JSON / baseline
+→ 별도 프로세스에서 재조회
+→ 데이터 의미 일치 검증
+→ Server JSON / 기준선 승인·반영
 ~~~
 
 실패하면 기존 정상 UAsset / Server JSON / last-successful baseline을 보존하거나 복구합니다.
 
-Refresh는 read-only이며 삭제된 source를 발견했다고 기존 artifact를 자동 삭제하지 않습니다.
+Refresh는 읽기 전용이며 원본 삭제가 관측되어도 기존 산출물을 자동 삭제하지 않습니다.
 
 ## 첫 실제 검증 사례
 
-ProjectSF의 기존 StatGrowth DataTable을 첫 실제 slice로 사용했습니다.
+ProjectSF의 기존 StatGrowth DataTable을 첫 실제 제작·검증 단위로 사용했습니다.
 
 ~~~text
-Existing UDataTable
-→ migration candidate
-→ Creator approval
-→ XLSX Authoring SoT
-→ DataForge build
-→ SFDataBuildCommandlet bake
-→ UDataTable readback
+기존 UDataTable
+→ 이관 후보 검토
+→ Creator 승인
+→ XLSX 작성 원본
+→ DataForge 빌드
+→ SFDataBuildCommandlet Bake
+→ UDataTable 재조회
 → Server JSON
-→ parity
+→ 데이터 일치 검증
 ~~~
 
 검증 결과:
@@ -213,6 +213,6 @@ DataForge 자체도 Agent Workflow의 중요한 예입니다.
 
 ## 이 사례의 핵심
 
-DataForge에서 보여주고 싶은 것은 “Excel importer를 만들었다”가 아닙니다.
+DataForge의 핵심은 단순히 Excel 가져오기 도구를 만든 것이 아닙니다.
 
 **기획자 authoring, Unreal runtime artifact, Server data를 하나의 검증 가능한 production pipeline으로 연결하고, incremental build·rollback·native readback까지 포함한 데이터 제작 체계를 만든 것**이 핵심입니다.

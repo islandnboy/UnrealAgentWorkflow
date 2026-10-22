@@ -98,7 +98,7 @@ Repository
 Primary DB
 ~~~
 
-현재 local implementation에서는 SQLite 기반 authority를 사용하지만 business logic이 특정 DB 구현에 직접 의존하지 않도록 Repository 경계를 둡니다.
+현재 로컬 구현은 SQLite 기반 데이터 권한을 사용하지만, 비즈니스 로직이 특정 데이터베이스에 직접 의존하지 않도록 Repository 경계를 둡니다.
 
 Peer AS가 authority SQLite 파일을 직접 열지 않고 RPCNet을 통해 접근하도록 하여 향후 RDB 교체 경계를 보존합니다.
 
@@ -117,11 +117,11 @@ Transport
 → Repository
 ~~~
 
-RPCNet은 통신 infrastructure를 제공하고, Server가 Account / Player / World semantics를 소유합니다.
+RPCNet은 통신 기반을 제공하고, Server는 Account / Player / World에 대한 게임 도메인 의미를 소유합니다.
 
 ## 로컬 배포 구성
 
-개인 개발 환경에서도 실제 service topology를 검증할 수 있도록 다음 기반을 구성했습니다.
+개인 개발 환경에서도 실제 서비스 구성을 검증할 수 있도록 다음 기반을 구성했습니다.
 
 - Gateway
 - 다중 AS / GS 실행 프로필
@@ -134,13 +134,13 @@ RPCNet은 통신 infrastructure를 제공하고, Server가 Account / Player / Wo
 - 로그 / 백업 / 단계적 업데이트 절차
 - 별도 Runtime 설치를 최소화한 win-x64 배포 패키지
 
-운영 scale이 필요하기 전 Redis, microservice, orchestration을 무조건 도입하지 않는 것이 설계 원칙입니다.
+규모 확장이 필요하다는 근거가 생기기 전에는 Redis, 마이크로서비스, Orchestration을 무조건 도입하지 않는 것이 원칙입니다.
 
 ## 검증 기록
 
 ### 서버 초기 기반 검증
 
-현재 Architecture에 기록된 current-phase server gate:
+기존 아키텍처 문서에 기록된 당시 서버 기반 검증 결과:
 
 - 서버와 외부 Bot 연동 PASS
 - 빌드 결과 **경고 0건 / 오류 0건**
@@ -148,18 +148,18 @@ RPCNet은 통신 infrastructure를 제공하고, Server가 Account / Player / Wo
 
 ### Gateway 배포 검증 시점
 
-Gateway / shared coordination / TLS를 확장한 별도 deployment checkpoint에서는:
+Gateway / 공유 상태 조정 / TLS를 확장한 별도 배포 검증에서는:
 
 - Release 빌드 PASS
 - **회귀 테스트 58개 PASS**
 - 가중치 기반 실제 연결 분산의 개별 검증 PASS
 - 패키지 파일 무결성 검사 PASS
 
-58개 regression + targeted test를 하나의 59-test full-suite 실행으로 과장하지 않고 별도 검증으로 기록합니다.
+회귀 검사 58개와 목적별 개별 검사를 합쳐 하나의 59개 전체 테스트 실행으로 과장하지 않고, 별도 검증으로 기록합니다.
 
 ## 실제 Unreal Client 연동 흐름
 
-후속 Client integration에서는 실제 UE Client가 서버 흐름을 소비합니다.
+후속 Client 연동에서는 실제 UE Client가 서버 흐름을 이용합니다.
 
 ~~~text
 Entry
@@ -212,7 +212,7 @@ Issue / Goal
 → Evidence
 ~~~
 
-서버 기능이 추가될 때 topology 전체를 매번 다시 설계하지 않고 기존 Authority와 Extension Point 안에서 확장합니다.
+서버 기능을 추가할 때 전체 토폴로지를 다시 설계하지 않고 기존 권한·확장 지점 안에서 구현을 확장합니다.
 
 ## 이 사례의 핵심
 

@@ -9,11 +9,11 @@ ProjectSF에서는 사람과 AI를 서로 다른 제작 파이프라인으로 �
 사람이 Unreal Editor에서 직접 수정한 결과도 정상 Production이며, 다음 Agent는 이를 기존 입력으로 관측하고 보호합니다.
 
 ~~~text
-Approved Input
-→ Human or AI Production
-→ Saved Product State
+승인된 입력
+→ 사람 또는 AI Agent의 제작
+→ 저장된 제품 상태
 → Evidence
-→ Human or AI continues
+→ 사람 또는 AI Agent가 이어서 작업
 ~~~
 
 ## Data / Recipe / Tool / Evidence 책임 구분
@@ -67,12 +67,12 @@ Goal과 Current State를 Evidence 폴더에 복제하지 않습니다. Issue 경
 제품 제작은 가능한 한 연결된 전체를 유지하며 반복 개선합니다.
 
 ~~~text
-Goal
-→ Make
-→ Observe
-→ Evaluate
-→ Refine
-→ next Cycle
+목표
+→ 제작
+→ 관측
+→ 평가
+→ 개선
+→ 다음 순환
 ~~~
 
 매 Cycle마다 새 Issue, 새 문서, 새 framework를 만드는 것이 목표가 아닙니다.
