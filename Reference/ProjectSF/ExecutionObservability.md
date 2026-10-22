@@ -1,51 +1,22 @@
-# Execution Observability
+# Execution Observability — curated public summary
 
-작업자가 Workflow를 따라 정상적으로 진행되는지 확인할 수 있도록 화면 Trace의 표현을 정의한다.
+> **Curated summary, not verbatim.** Inspected private ProjectSF `AI/Workflows/ExecutionObservability.md` at `08715c68b04f` (2026-10-22).
 
-## Screen trace
+Progress reporting is a way for the **Creator** to understand what has actually happened and what will happen next, not a compulsory report schema, extra CLI, pause point or new permission boundary.
 
-~~~text
-Request / Issue
-→ WorkType
-→ Workflow / Step
-→ Skill
-→ required capability
-→ actual Toolset / Tool
-→ execution
-→ Artifact
-→ validation
-→ next action
-~~~
+## Reporting
 
-## Rules
+- Start/resume identifies the selected **Issue / Spec / direct request** and actual known state.
+- Report meaningful results and the next approved action; continue within the authorization boundary without requiring a user to type “continue” after each progress report.
+- Distinguish candidate versus **applied** Skill, discovered versus **actually invoked** Tool, and delegated results versus Main's integrated verification.
+- Distinguish tool/build/save success, technical/product validation, Creator acceptance and remote-main publication.
+- If not observed, say `NOT_TESTED` / unknown instead of inventing a status or speedup.
+- Keep secrets, raw logs and hidden reasoning out of traces.
 
-- 시작·재개에는 현재 WorkType / Workflow / Step / Status를 표시한다.
-- discovery 후보와 실제 호출을 구분한다.
-- 미확인은 `UNRESOLVED`, 비해당은 `NOT_APPLICABLE`, 선택만 한 Tool은 `NOT_CALLED`이다.
-- Tool success, preflight, product validation, Goal Acceptance를 서로 다른 판정으로 표시한다.
-- Artifact와 Evidence를 검증 상태에 연결한다.
-- 선택 경로가 바뀌면 변경 내용과 관측 가능한 이유를 짧게 알린다.
-- 비밀정보, 대용량 원문, 숨은 추론은 출력하지 않는다.
+A detailed execution trace **may** expose Request/Step, applied Skill, actual Tool, artifact, observed validation and next action. Small reads/edits need no template.
 
-## Progress header
+## Continuation and completion
 
-~~~text
-Task: <Issue or task>
-[WorkType: ... | Workflow: ... | Step: ... | Status: ...]
-Progress: ...
-Skills(applied): ...
-Tools(actual): ...
-~~~
+Before resuming, reconcile the latest original Issue or Spec state with the repository/Editor/Evidence; do not trust previous conversation state. A final task summary reports the changed artifact and verified scope, applicable Skill and tools when relevant, outstanding decisions/limitations, and whether publication occurred. A progress update by itself is **neither final completion nor a new approval request**.
 
-매 Tool 호출마다 별도 메시지를 만들지는 않는다.  
-실제 진행 상태와 다음 행동을 판단할 수 있는 의미 있는 checkpoint를 보여주는 것이 목적이다.
-
-## Final execution summary
-
-최종 전달에는 다음을 짧게 남긴다.
-
-- actual Workflow / Step order
-- applied Skills
-- actual Tools
-- Artifact / Evidence
-- validation result
+See [TaskExecution source](TaskExecution.md) and [inspection scope](../../Docs/SourceAudit-2026-10-22.md).

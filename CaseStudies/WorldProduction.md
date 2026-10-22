@@ -1,13 +1,15 @@
 # World Production Case Study
 
+> **Historical prototype case — NeoSeoul/GIS, 2026-10 checkpoints.** The large geographic-world pipeline and measurements below document work performed **before** the 2026-10-14 shift to a smaller, intentionally compressed linear exploration action-adventure. They are **not** proof that the new world, Houdini/procedural authoring strategy, content pipeline or target-platform performance has been implemented or validated. Current gameplay/world design is owned by private ProjectSF; this page preserves the earlier engineering evidence.
+
 ## Goal
 
-서울 기반 대규모 World 제작을 한 번의 생성 작업이 아니라 **반복 가능한 Production system**으로 구축합니다.
+**당시 프로토타입 목표:** 서울 기반 대규모 World 제작을 한 번의 생성 작업이 아니라 **반복 가능한 Production system**으로 구축합니다.
 
 ## Applied pipeline
 
 ~~~text
-Approved geographic / authored source
+Approved geographic / authored source (historical GIS prototype)
 → canonical production input
 → terrain-production
 → landscape-production
@@ -21,7 +23,7 @@ Approved geographic / authored source
 
 필요한 Skill만 현재 Step에 조합하며 “World 전부를 처리하는 거대한 Skill” 하나를 두지 않습니다.
 
-## Current examples
+## Historical applied examples
 
 ### Road
 
@@ -104,7 +106,7 @@ World Partition 셀 경계, Landscape proxy 경계, 행정구역 경계와 제�
 
 대규모 World 제작에서 AI의 가치가 커지려면 한 번의 생성 품질보다 **입력, 수정, 재생성, 검증, 사람이 이어서 편집하는 흐름**이 유지되어야 합니다.
 
-이 Case Study는 그 제작 계약을 실제 ProjectSF World 작업에서 계속 다듬는 R&D입니다.
+이 Case Study는 이전 ProjectSF 월드 프로토타입의 제작·검증 계약과 한계를 기록합니다. 신규 월드 구현 상태는 이 페이지에서 추정하지 않습니다.
 
 ## Screenshots and workflow example
 

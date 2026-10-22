@@ -1,5 +1,7 @@
 # Designer-led Production Case Study
 
+> **Historical prototype:** The River/Water example uses NeoSeoul-era GIS inputs and 2026-10-07 checkpoints. It is preserved as a Creator/AI production example, not as verified progress on the new linear-adventure world after the 2026-10-14 direction change.
+
 ## Case: River / Water Production
 
 이 Case Study는 ProjectSF의 실제 Water Production 작업을 포트폴리오용으로 요약한 것입니다.
