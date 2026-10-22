@@ -1,113 +1,45 @@
-# 월드 제작 사례
+# 월드 제작 사례 — 이전 GIS 프로토타입
 
-> **과거 프로토타입 사례 — NeoSeoul/GIS, 2026년 10월 검증 기록.** 아래의 대규모 지리 기반 월드 제작 공정과 수치는 2026-10-14 월드 방향 전환 이전의 작업입니다. 신규 월드, Houdini 기반 절차 제작, 콘텐츠 공정이나 목표 플랫폼 성능이 구현·검증됐다는 뜻은 아닙니다. 현재 월드 설계의 원본은 비공개 ProjectSF이며, 여기에는 당시의 기술적 근거만 보존합니다.
+> 이 문서는 2026-10-14 월드 방향 전환 **이전** NeoSeoul/GIS 기반 제작 기록입니다. 새로운 압축 선형 월드나 Houdini 제작 결과의 구현·검증 증거가 아닙니다.
 
-## 제작 목표
+## 목표와 결과 계약
 
-**당시 프로토타입 목표:** 서울 기반 대규모 World 제작을 한 번의 생성 작업이 아니라 **반복 가능한 Production system**으로 구축합니다.
+서울 기반 월드의 지형·도로·수계를 데이터 입력으로 제작·부분 수정하고, 기존 결과 및 사람의 직접 편집을 보존하는 것이 당시 목표였습니다. Creator는 승인 범위, 보호할 지형·도로·수계, 실제 흐름/형상, 저장·재로드, 시각 품질과 검증 기준을 정의했습니다.
 
-## 적용한 제작 흐름
+```text
+승인된 GIS / Production 입력
+→ terrain / landscape
+→ road
+→ water-terrain-preparation / water
+→ world-structure / world-validation
+→ 저장·재조회 / Evidence → Creator 검수
+```
 
-~~~text
-승인된 지리·제작 입력 (과거 GIS 프로토타입)
-→ canonical production input
-→ terrain-production
-→ landscape-production
-→ road-production
-→ water-terrain-preparation
-→ water-production
-→ world-structure
-→ world-validation
-→ Production Evidence
-~~~
+AI Agent는 필요한 Skill을 단계별로 조합하고 Unreal 도구로 실제 생성·수정을 수행합니다. Water Actor가 생성됐다는 사실만으로 전체 수계가 완료됐다고 판정하지 않습니다.
 
-필요한 Skill만 현재 Step에 조합하며 “World 전부를 처리하는 거대한 Skill” 하나를 두지 않습니다.
+## 실제 구조와 편집 경계
 
-## 과거 적용 사례
-
-### 도로
-
-도로 원천에서 editable / regenerable road result를 만들고 다음을 구분합니다.
-
-- source identity
-- road design input
-- generated output
-- runtime representation
-- human-editable representation
-- partial regeneration boundary
-
-대표 구간에서 geometry / grounding / junction / persistence를 검증한 뒤 확장합니다.
-
-### 수계
-
-Water production 전에 terrain preparation을 별도 책임으로 검증합니다.
-
-~~~text
-수계 지형 준비
-→ 검증된 하상 / 호안 / 수위 기준
-→ Native River / Lake 제작
-→ 수심 / 호안 / 연결성 검증
-~~~
-
-Water actor 생성만으로 완료 처리하지 않고 실제 지형, 수심, 연결, persistence를 확인합니다.
-
-### 검증
-
-대표 검증 대상:
-
-- 형상 정확도
-- 지형 접지
-- 연결성
-- 스트리밍 경계
-- 저장 / 재로드
-- 재생성 시 기존 결과 보호
-- 측정된 범위의 실행 비용
-- 시각적 판독성
-- 필요한 경우 Creator 검수
-
-## 공간 분할과 레이어 구조
-
-월드는 **로드 단위, 제작 지역, 도메인 레이어, 제작 청크**를 각각 관리한다. 같은 좌표 위에 여러 경계가 겹치지만, 행정구역 하나를 World Partition 셀 하나나 생성 청크 하나로 고정하지 않는다.
-
-| 분할 기준 | 책임과 실제 사용 |
+| 구분 | 역할 |
 | --- | --- |
-| World Partition | 공간에 따른 로드·언로드와 Actor 접근. Landscape component·StreamingProxy 및 External Actor 패키지 구조를 확인하고 필요한 로드 범위에서 검증 |
-| 행정구역·제작 Region | GIS 행정경계 polygon과 hole, 송파구·잠실/롯데 등의 상세 제작 범위. 대상 선택·clip·보호와 region 소유권의 기준 |
-| 지형·수계·도로 도메인 | 원본·입력·생성물과 수정 책임을 분리. 지형 보정, 물 Actor, 도로면·표시·보도를 각각 추적하고 접지·연결은 함께 검증 |
-| 제작 청크·구간 | 배치 생성·checkpoint·저장·재개 단위. 안정 feature/segment ID와 생성 owner를 유지하고 인접 구간의 경계 조건을 공유 |
+| World Partition | 공간 로드·언로드와 Actor·Landscape 접근 |
+| 제작 Region | GIS polygon과 지정 지역의 편집·보존 책임 |
+| 도메인 | 지형 보정, 도로면·표시·보도, 물 Actor의 분리된 제작 책임 |
+| 제작 청크·구간 | 안정적인 Feature identity, 배치·재생성·저장·재개 단위 |
 
-![공간 분할과 제작 소유권의 관계](AgentDrivenGameProduction/world-spatial-structure.png)
+행정구역/제작 청크를 World Partition Cell이나 Unreal Data Layer에 일대일로 대응시키지 않았습니다.
 
-공간 분할 개념도. 격자와 행정구역 형상은 관계를 설명하는 예시이며 실제 지도·셀 크기·runtime 설정값을 재현한 그림이 아니다. 구역을 가로지르는 도로·수계를 구역마다 별도 원본으로 복제하지 않고 feature identity와 생성 소유권을 추적한다.
+![공간 분할과 제작 소유권](AgentDrivenGameProduction/world-spatial-structure.png)
 
-### 지형 레이어
+- **도로:** 도로면과 차선·보도의 표현 및 충돌을 구분하고, 구간 변경 시 기존 도로면과 주변 제작 결과를 보존했습니다.
+- **지형:** Base 및 수계 굴착·호안 보정용 Landscape Edit Layer를 분리했습니다. 2026-10-07 저장 검증에서 **Edit Layer 8개, Landscape Component 128개**가 관측됐습니다.
+- **수계:** 하상·호안 준비와 Native River/Lake 제작을 분리하고 수위·깊이·흐름·인접 지형·저장 상태를 검증했습니다.
 
-GIS 고도로 만든 Base를 비교·보존 기준으로 두고, 수계 굴착·호수 basin·강바닥·호안 보정을 생성 Landscape Edit Layer로 분리한다. 수정 범위와 생성 revision을 연결해 필요한 부분만 재검증한다. 2026-10-07 저장 상태 검증에서는 **Landscape Edit Layer 8개와 component 128개**를 관측했고, 보호 레이어와 최종 지형의 표본을 이전 기준과 비교했다. 이 숫자는 해당 checkpoint의 관측값이다.
+![지형·수계·도로의 책임 레이어](AgentDrivenGameProduction/world-domain-layers.png)
 
-### 수계 레이어
+## 당시 결과와 한계
 
-바닥·호안 지형 준비와 Native River/Lake 생성은 별도 책임이다. 물 Actor의 형상·수위·폭·깊이·flow 입력, WaterZone·mesh·재질을 연결하되 지형 준비 검증을 물 생성의 선행 조건으로 둔다. 공유 하천이나 호수를 여러 행정구역의 제작 작업에서 중복 생성하지 않도록 입력·Actor·생성 소유권을 확인한다.
+강 구간 11개, 표본점 2,470개, 호수 17개와 호수 지점 545개 등이 2026-10-07 검증 기록에 있으며, 당시 일부 원본 Scene 파일의 변경 방지와 Native readback을 확인했습니다. 이 수치는 **당시 Snapshot**이며 신규 월드 상태가 아닙니다.
 
-### 도로 레이어
+당시에도 전체 시각 품질, 자연스러운 호안 연결, 패키지 실행, 목표 하드웨어 성능, 사람이 직접 수정한 뒤 Agent가 재개하는 전 과정과 Creator의 최종 수용은 별도 미검증/후속 작업으로 구분했습니다.
 
-승인된 polygon 기반 도로면과 그 위의 차선 표시·보도를 분리한다. 기존 도로면·접지·collision을 보존하면서 profile·guide·구간 입력으로 표시와 보도를 제작한다. 차선 표시의 시각 표현과 보도의 보행 collision도 구분해 검증한다. 도로를 모두 Landscape 높이 레이어에 합쳐 제작하는 구조로 설명하지 않는다.
-
-![지형 수계 도로의 도메인 레이어 구조](AgentDrivenGameProduction/world-domain-layers.png)
-
-도메인 레이어 구조도. 여기서 레이어는 제작 책임의 구분이며 **Actor Folder, Landscape Edit Layer, Unreal Data Layer는 서로 다른 개념**이다. 지형의 Edit Layer 분리는 직접 관측했지만, 행정구역·수계·도로 각각이 Unreal Data Layer에 일대일로 구현됐다고 주장하지 않는다.
-
-### 부분 수정과 공통 검증
-
-송파구 도로 제작에서는 실제 행정구역 범위 안의 명시 구간을 선택하고, 기존 지형·수계·도로면·수작업을 보존하며 표시·보도를 확장했다. 지형 보정은 필요한 생성 Edit Layer와 영역으로, 수계 변경은 해당 Native Actor와 입력으로 범위를 좁힌다. 변경 후에는 접지·호안·교차부·인접 구간 연결, 저장/reload, 비대상 보존을 확인한다.
-
-World Partition 셀 경계, Landscape proxy 경계, 행정구역 경계와 제작 청크 경계는 각각 추적한다. 저장·로드 관측이 실제 전체 경로의 streaming 품질·메모리·패키지 성능을 인증하는 것은 아니며, 목표 환경에서의 검증은 별도로 남긴다.
-
-## 이 사례의 의미
-
-대규모 World 제작에서 AI의 가치가 커지려면 한 번의 생성 품질보다 **입력, 수정, 재생성, 검증, 사람이 이어서 편집하는 흐름**이 유지되어야 합니다.
-
-이 Case Study는 이전 ProjectSF 월드 프로토타입의 제작·검증 계약과 한계를 기록합니다. 신규 월드 구현 상태는 이 페이지에서 추정하지 않습니다.
-
-## 제작 화면과 작업 흐름
-
-[Agent-Driven Game Production 사례](AgentDrivenGameProduction.md#이전-neoseoul-월드-제작-파이프라인을-실제-지역에-적용)에서 월드 제작 공정, 도로 전후 화면, 지역 rough와 검증 경계를 함께 확인할 수 있습니다.
+실제 전·후 화면, 전투·MetaHuman 작업과 관련 Evidence의 범위는 [AI Agent 기반 제작 사례](AgentDrivenGameProduction.md)를 참고하세요.

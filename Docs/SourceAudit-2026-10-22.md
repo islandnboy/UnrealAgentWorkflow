@@ -85,3 +85,15 @@
 공개 포트폴리오의 Markdown 31개 중 **26개 문서**에서 제목·설명·표·도식의 자연어 표현을 한국어 중심으로 정리했습니다. 원본을 그대로 복사한 4개 Snapshot과 이미 한국어 중심으로 작성된 Gateway 배포 참고본 1개는 번역 대상으로 변경하지 않았습니다. 이번 작업은 언어·가독성 정비이며, 제품 구현·검증 상태나 역사적 Evidence를 새로 승인하는 작업이 아닙니다.
 
 공개 포트폴리오의 설명과 제목은 한국어 중심으로 정리합니다. `Creator / AI Agent / Programmer`, 제품·시스템명, API·경로, `PASS`/`NOT_TESTED` 등 기계적 상태값은 원형을 유지할 수 있습니다. **원본 그대로 공개한 네 문서는 번역하지 않고 SHA 일치 상태를 보존합니다.** 번역은 새 구현이나 추가 검증을 의미하지 않습니다.
+
+## 2026-10-23 공개 저장소 구조 정리
+
+이 절은 위 2026-10-22 원본 실사를 변경하지 않고, **공개 포트폴리오의 문서 분류 작업**만 기록합니다.
+
+- 비공개 ProjectSF의 확인된 main은 `08715c68b04f`로 당시 실사와 같습니다.
+- `Samples/`의 제작 산출물 예시는 `Docs/CreatorWorkflow.md`의 제작 사례 구성과 중복되어 별도 카테고리를 폐지했습니다.
+- `CaseStudies/RecipeProduction.md`, `CaseStudies/UIProduction.md`는 실제 완료 사례보다 작성/제작 기준에 가까워 `Docs/RecipeProduction.md`, `Docs/UIProduction.md`로 정리했습니다.
+- `CaseStudies/DesignerProduction.md`의 이전 수계 예시는 월드·Agent 제작 사례와 중복되어 `CaseStudies/WorldProduction.md`로 핵심 기준을 합쳤습니다.
+- `ServerProduction.md`는 원본 서버 아키텍처·클라이언트 로그인·배포 문서를 대조해 로컬 구현과 미검증 운영 범위를 사례별로 분리했습니다.
+- README는 Agent Workflow / RPCNet / 서버를 중심으로 축약하고 기타 자료는 보조 자료로 정리했습니다.
+- 코드·Unreal Editor·실서버 및 회귀 테스트를 새로 실행하지 않았습니다. 이 정리는 새로운 기능 완료 또는 검증 판정이 아닙니다.

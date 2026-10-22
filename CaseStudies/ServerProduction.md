@@ -1,221 +1,72 @@
-# 온라인 서버 제작 사례
+# 온라인 서버 구현·검증 사례
 
-## 온라인 게임 서비스 기반
+ProjectSF에서 실제로 개발하고 검증 기록을 남긴 **Gateway / Account Server(AS) / Game Server(GS)**의 현재 공개 범위입니다. 설계상 확장 목표와 로컬 환경의 검증 결과를 구분합니다.
 
-ProjectSF 서버는 단일 게임 서버 프로세스에 모든 책임을 넣지 않고 **외부 진입, 인증, 영속 게임 상태, 향후 실시간 Gameplay simulation**을 분리합니다.
+- 기준: ProjectSF `main` `08715c68b04f` (2026-10-22)
+- 근거: 원본 `Docs/Technical/Server/ServerArchitecture.md`, `GatewayDeploymentDesign.md`, `Docs/Technical/Client/ClientLoginIntegration.md`, `PlayerScopeSubsystem.md` 및 관련 Evidence
+- 이번 공개 문서 정리에서 소스 빌드·서버·Unreal Editor 테스트는 **재실행하지 않음**
 
-Agent Workflow는 이 서버 작업에도 동일한 Issue / Step / Skill / Evidence 모델을 적용합니다.
+## 구현된 구조
 
-## 참고 아키텍처
+```text
+Client / Bot
+    ↓
+Gateway — 상태 확인 / AS 연결 분산 / TLS 진입
+    ↓
+Account Server(AS) — Account 인증 / 세션·GS 입장권
+    ↓
+Game Server Directory / Registry
+    ↓
+Game Server(GS) — Player·World·PlayerScope의 영속 상태 권한
+    ↓
+Domain Service → Repository → SQLite (로컬 구현)
 
-- [Server Architecture / Topology](../Docs/Server/ServerArchitecture.md) — 기존 구조 문서에서 선별한 토폴로지·Authority·Persistence·Protocol 경계
-- [Gateway Deployment Design](../Docs/Server/GatewayDeploymentDesign.md) — 기존 Gateway·AS 풀·Coordination·설치·런처 설계안의 공개 참고본
+미구현/별도 검증: UE Dedicated Server 실시간 Gameplay Authority
+```
 
-목표 아키텍처와 설계안의 당시 검증 범위를 구분합니다. 후속 Client 연동과 검증 checkpoint는 이 사례의 Verification / Actual Unreal Client flow에서 확인합니다.
+Gateway는 계정 정보를 소유하지 않고, AS는 로그인과 GS 인계, GS는 지속되는 Player·World 데이터 책임을 맡습니다. 네트워크 직렬화와 전송은 [RPCNet](RPCNet.md)의 계약을 사용하며 서비스 도메인 로직을 RPCNet에 넣지 않습니다.
 
-## 목표 구조
+## 사례 1 — 로그인과 영속 Player 상태
 
-~~~text
-Client
-  ↓
-Gateway
-  ├─ 상태 확인 / 장애 전환
-  ├─ 연결 분산
-  ├─ TLS 외부 진입
-  └─ 향후 지역별 경로 선택
-  ↓
-Account Server Cluster
-  ↓
-GameServer Directory / Registry
-  ↓
-Game Server Cluster
-  ↓
-Repository / Persistence
-  ├─ 선택적 Cache
-  └─ Primary DB
+Account 인증 후 GS 입장권을 발급하고, GS에서 권한과 Player 소유권을 확인합니다. AS·GS는 Repository 경계로 저장소 구현을 분리했습니다. 당시 서버 Foundation의 **실제 프로세스 + 외부 Bot 검증**, 빌드 경고/오류 0건 및 **회귀 테스트 52개 PASS**가 기록돼 있습니다. 이 수치는 서버 초기 기반 검증이며 이후 Gateway 확장 전체의 검사 건수가 아닙니다.
 
-향후 범위:
-Game Server ↔ Unreal Dedicated Server
-~~~
+인증된 `GetPlayerScope` 콘텐츠 조회 사례에서는 Session의 Player 권한을 사용하고, GS Repository가 반환하는 영속 데이터를 읽습니다. 실제 Bot이 데이터 변경과 서버 재시작 전후의 조회 결과를 확인했습니다. 모든 Inventory·Quest·Party 콘텐츠가 구현됐다는 뜻은 아닙니다.
 
-## 권한과 책임 경계
+## 사례 2 — Gateway 연결 분산과 로컬 배포
 
-### Gateway
+Gateway는 RPCNet Health 검사에 통과한 AS 후보를 대상으로 연결을 분산하고, 장애·재접속 시 상태 전이를 처리합니다. 다중 AS, AS 간 Account Repository 접근 책임, GS 소유권, TTL/lease·reservation 경계를 정리했습니다. 각 AS가 타 AS의 SQLite 파일을 직접 공유하거나 Migration을 실행하지 않도록 했습니다.
 
-- 공개 서비스 진입점
-- 비즈니스 메시지 의미를 해석하지 않는 전달
-- 상태 검사를 통과한 AS 풀
-- 연결 부하 분산
-- TLS / 연결 제한
-- 향후 지역 / 점검 경로 선택
+개인 PC 배포용 Launcher/Supervisor, 단계적 시작·종료, 로그·백업, TLS ingress를 로컬 구현했습니다. 별도의 배포 검증 시점에 **회귀 테스트 58개 PASS**, 실제 연결 분산 개별 검증, 패키지 무결성 검사 PASS가 기록돼 있습니다. 서버 Foundation의 52개 테스트와 합산하지 않습니다.
 
-### 계정 서버(AS)
+## 사례 3 — 실제 Unreal Client의 게임 진입
 
-- 계정 / 인증
-- 로그인 세션과 GS 인계 티켓
-- GS 선택
-- persistent gameplay traffic relay는 하지 않음
-
-### GameServer Directory
-
-- GS 등록
-- Heartbeat / 상태 확인
-- 수용량 / 버전 메타데이터
-- 연결 대상 선택
-
-초기에는 AS 내부 logical component로 유지하고 scale 필요 전 별도 service로 강제 분리하지 않습니다.
-
-### 게임 서버(GS)
-
-- Player
-- Character
-- Inventory
-- Quest / Party
-- World 영속 상태
-- PlayerScope
-
-### Unreal Dedicated Server — 향후 범위
-
-- 이동
-- 전투
-- GAS
-- 물리
-- 실시간 게임플레이 시뮬레이션
-
-Persistent Player / World 데이터의 최종 SoT와 realtime simulation authority를 구분합니다.
-
-## 영속화 책임 경계
-
-~~~text
-AS / GS
-  ↓
-Domain Service
-  ↓
-Repository
-  ↓
-선택적 Cache
-  ↓
-Primary DB
-~~~
-
-현재 로컬 구현은 SQLite 기반 데이터 권한을 사용하지만, 비즈니스 로직이 특정 데이터베이스에 직접 의존하지 않도록 Repository 경계를 둡니다.
-
-Peer AS가 authority SQLite 파일을 직접 열지 않고 RPCNet을 통해 접근하도록 하여 향후 RDB 교체 경계를 보존합니다.
-
-## RPCNet 연동
-
-새 Server 통신은 RPCNet protobuf / generated contract를 사용합니다.
-
-~~~text
-Transport
-→ Connection
-→ Session
-→ Protocol / Dispatch
-→ Generated Stub
-→ Final Endpoint
-→ Domain Service
-→ Repository
-~~~
-
-RPCNet은 통신 기반을 제공하고, Server는 Account / Player / World에 대한 게임 도메인 의미를 소유합니다.
-
-## 로컬 배포 구성
-
-개인 개발 환경에서도 실제 서비스 구성을 검증할 수 있도록 다음 기반을 구성했습니다.
-
-- Gateway
-- 다중 AS / GS 실행 프로필
-- 상태 확인 / 실행 준비 상태
-- 가중치 기반 연결 분산
-- TLS ingress
-- Launcher / Supervisor
-- 계정 등록
-- Bot 검증
-- 로그 / 백업 / 단계적 업데이트 절차
-- 별도 Runtime 설치를 최소화한 win-x64 배포 패키지
-
-규모 확장이 필요하다는 근거가 생기기 전에는 Redis, 마이크로서비스, Orchestration을 무조건 도입하지 않는 것이 원칙입니다.
-
-## 검증 기록
-
-### 서버 초기 기반 검증
-
-기존 아키텍처 문서에 기록된 당시 서버 기반 검증 결과:
-
-- 서버와 외부 Bot 연동 PASS
-- 빌드 결과 **경고 0건 / 오류 0건**
-- **테스트 52개 PASS**
-
-### Gateway 배포 검증 시점
-
-Gateway / 공유 상태 조정 / TLS를 확장한 별도 배포 검증에서는:
-
-- Release 빌드 PASS
-- **회귀 테스트 58개 PASS**
-- 가중치 기반 실제 연결 분산의 개별 검증 PASS
-- 패키지 파일 무결성 검사 PASS
-
-회귀 검사 58개와 목적별 개별 검사를 합쳐 하나의 59개 전체 테스트 실행으로 과장하지 않고, 별도 검증으로 기록합니다.
-
-## 실제 Unreal Client 연동 흐름
-
-후속 Client 연동에서는 실제 UE Client가 서버 흐름을 이용합니다.
-
-~~~text
-Entry
-→ Login UI
-→ Gateway
-→ 계정 인증
-→ 자동 GS 입장
-→ 초기 PlayerScope 적용
+```text
+Entry 로그인 UI
+→ Gateway / AS 인증
+→ GS 자동 연결·입장
+→ 초기 PlayerScope 검증·적용
 → NeoSeoul OpenLevel
-~~~
+```
 
-GameInstance가 LoginFlowCoordinator를 소유하고, AS / GS ConnectionHandler를 분리하며 PlayerScopeSubsystem이 인증/PlayerScope 상태를 맵 이동 동안 유지합니다.
+GameInstance 소유 LoginFlowCoordinator가 AS/GS ConnectionHandler를 관리합니다. PlayerScopeSubsystem은 검증된 Shared 데이터의 **Client 측 적용 원본**이며, 영속 데이터 최종 Authority는 GS입니다. 계정·Player·World·Session·Revision을 확인한 뒤 상태를 적용합니다. 실패·중단·재로그인·서버 재시작 경로에서도 연결과 상태를 정리합니다.
 
-실제 검증에는 다음이 포함됩니다.
+2026-10-07에는 실제 서버 프로세스와 `UnrealEditor-Cmd -game -NullRHI`를 이용한 UI delegate 호출·로그인·월드 이동 검증이 기록됐습니다. 2026-10-08에는 RPCNet SDK 구조 변경 후 Local `RealUserFlow`를 새 서버 실행 상태에서 **2회 재검증**했고 Player identity·PlayerScope readback이 유지됐습니다. 이것은 사람의 실제 PIE 입력·렌더링 품질 검증과 구분합니다.
 
-- SFEditor UHT / C++ / DLL 빌드 PASS
-- Gateway / AS / GS 실제 프로세스 실행
-- 로그인 Widget 제출
-- 인증 실패 처리
-- GS 연결 끊김 정리
-- 재로그인
-- 서버 재시작
-- 초기 PlayerScope 적용
-- Entry → NeoSeoul 맵 이동
+## 현재 확인 범위
 
-## 아직 완료로 주장하지 않는 범위
+| 항목 | 공개된 상태 |
+| --- | --- |
+| Gateway / AS / GS 로컬 서버 프로세스, 계정·GS 진입, 영속 Player 상태 | 구현 및 당시 Bot/통합 검증 기록 |
+| Health 기반 AS 연결 분산, 설치용 TLS ingress, Launcher | 로컬 구현 및 당시 개별 검증 기록 |
+| UE Client 로컬 TCP 로그인·PlayerScope 적용·맵 이동 | 실행·재조회 검증 기록 |
+| Unreal Dedicated Server의 이동·전투·GAS 복제 | 향후 범위 / 미구현 |
+| Public TLS/WAN Unreal Client, 패키징 게임 전체 흐름 | `NOT_TESTED` |
+| 운영 수준 Gateway HA, 공유 운영 RDB, 다중 지역 서비스 | 미구현 / 운영 검증 없음 |
 
-현재 포트폴리오에서 완료된 것으로 주장하지 않는 항목:
+해당 테스트 수치와 PASS는 **과거 개별 checkpoint의 증거**입니다. 최신 제품 전체의 PASS, 운영 배포 안정성이나 대규모 부하 성능을 주장하지 않습니다.
 
-- 공용 WAN 환경의 Client 실행
-- 운영 수준 고가용성(HA)
-- 운영용 공유 RDB
-- 운영용 Redis / Cache 배포
-- 패키징 게임의 전체 연동
-- Unreal Dedicated Server 게임플레이 복제
-- 운영 수준의 다중 지역 배포
+## 설계 참고
 
-## Agent Workflow와의 연결
-
-~~~text
-Issue / Goal
-→ 현재 원본 확인
-→ server-feature-production Skill
-→ 구조 / 권한 경계 조사
-→ RPCNet 계약 영향 검토
-→ 구현
-→ 빌드 / 결정론적 테스트
-→ Bot / 실제 프로세스 검증
-→ 필요한 경우 Client 연동
-→ Evidence
-~~~
-
-서버 기능을 추가할 때 전체 토폴로지를 다시 설계하지 않고 기존 권한·확장 지점 안에서 구현을 확장합니다.
-
-## 이 사례의 핵심
-
-이 Case Study의 핵심은 단순한 로그인 서버 구현이 아닙니다.
-
-**Gateway / Account / Game persistent authority / future Dedicated Server를 분리하고, 실제 Bot과 Unreal Client가 동일 protocol contract를 통해 끝까지 연결되는 온라인 게임 서버 기반을 단계적으로 구축하고 검증한 것**입니다.
+- [공개 서버 아키텍처](../Docs/Server/ServerArchitecture.md) — 목표 Topology 및 Authority 분리
+- [Gateway 배포 설계](../Docs/Server/GatewayDeploymentDesign.md) — 로컬 설치·연결 분산과 미검증 범위
+- [RPCNet 구현 사례](RPCNet.md) — Runtime / Protocol / Consumer Integration 경계
