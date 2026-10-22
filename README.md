@@ -30,7 +30,7 @@ Creator 목표 / 설계 / Acceptance
 | Agent Workflow | [제작 모델과 역할](Docs/CreatorCentricProduction.md) | Creator / AI Agent / Programmer의 책임과 품질 관리 |
 | Agent Workflow | [구조 및 책임 경계](Docs/Architecture.md) | Workflow·Rule·Skill·Recipe·Runtime·Evidence |
 | Agent Workflow | [실행·재개·검증](Docs/ExecutionModel.md) | Issue / Spec / 직접 요청, 최신 원본, 완료 판정 |
-| 제작 사례 | [SF Team Hub 전환](CaseStudies/TeamHubProduction.md) | Issue·Spec 병행, 버전·승인 경계, SPEC-74 실제 완료 사례 |
+| 제작 사례 | [SF Team Hub 운영 사례](CaseStudies/TeamHubProduction.md) | 제작자가 운영·검증한 Issue/Spec 공정, SPEC-74 완료·발행 사례 |
 | 제작 사례 | [실제 Unreal 제작](CaseStudies/AgentDrivenGameProduction.md) | 검증 기록이 있는 월드·전투·기본 몬스터 제작 단계 |
 | RPCNet | [네트워크 설계 및 검증](CaseStudies/RPCNet.md) | Runtime·ProtocolGenerator·Consumer 책임 분리와 Unreal 연동 |
 | Online Server | [서버 구현 사례와 현재 범위](CaseStudies/ServerProduction.md) | Gateway/AS/GS, 영속화, 로그인·접속 흐름, 로컬 검증 |
@@ -44,6 +44,8 @@ Creator 목표 / 설계 / Acceptance
 - 기록: [구현·검증 현황](Docs/ImplementationStatus.md) · [2026-10-22 원본 실사 범위](Docs/SourceAudit-2026-10-22.md)
 
 ## 검증과 공개 범위
+
+SF Team Hub 제작 공정은 Creator가 실제 운영·검증했고, SPEC-74 R3의 구현·기술 검증·수락·발행 기록을 남겼습니다. 현재 남은 **팀원 개인 계정별 플러그인 배포·모바일 접근**은 별도의 연결 문제이며 공정 자체의 미완료가 아닙니다.
 
 각 문서의 **PASS는 당시 명시된 검사 범위**에 한정합니다. 코드·Unreal Editor·서버를 이번 저장소 정리에서 재실행하지 않았습니다. 이전 NeoSeoul/GIS 제작 근거를 2026-10-14 이후 새 월드 완성 근거로 사용하지 않으며, 운영 수준 HA·WAN 배포와 Unreal Dedicated Server 연동 역시 완료로 주장하지 않습니다.
 

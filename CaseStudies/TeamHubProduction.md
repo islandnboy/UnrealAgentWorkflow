@@ -2,7 +2,7 @@
 
 ProjectSF에서 기존 **GitHub Issue 기반 경량 제작을 유지**하면서, 다자간 기획·설계 합의와 구현·검증·발행이 필요한 작업에 **SF Team Hub Spec 경로**를 도입한 사례입니다.
 
-이 문서는 공개된 [ProjectSF #74](https://github.com/islandnboy/ProjectSF/issues/74), [Team Hub v133 변경 기록 #92](https://github.com/islandnboy/ProjectSF/issues/92), ProjectSF `main` `08715c68b04f`의 Workflow·Skill·API 문서를 기준으로 작성했습니다. 이번 포트폴리오 갱신에서 Team Hub 사이트를 새로 조작하거나 회귀 테스트를 재실행하지 않았습니다.
+이 문서는 Creator가 실제 제작 공정을 운영·검증한 경험을 포함합니다. 공개된 [ProjectSF #74](https://github.com/islandnboy/ProjectSF/issues/74), [Team Hub v133 변경 기록 #92](https://github.com/islandnboy/ProjectSF/issues/92), ProjectSF `main` `08715c68b04f`의 Workflow·Skill·API 문서를 기준으로 작성했습니다. 이번 포트폴리오 갱신에서 Team Hub 사이트를 새로 조작하거나 회귀 테스트를 재실행하지 않았습니다.
 
 ## 변경 배경
 
@@ -66,7 +66,18 @@ Issue #74에서 Team Hub 자체를 기존 기능과 대조해 정식 요구·검
 | 연결된 GitHub Issue | **#74 CLOSED** 재조회 |
 | 사용량 기록 | FINAL, 단 **coverage PARTIAL** |
 
-위 수치는 **해당 시점 SPEC-74의 기록**입니다. 모든 Team Hub 기능과 모든 팀원 환경이 검증됐다는 의미는 아닙니다.
+위 수치는 **해당 시점 SPEC-74의 기록**이며 Creator의 공정 검증과 일치하는 사례입니다. 별도 개인 계정에 플러그인을 배포하는 문제를 이미 동작·검증된 제작 공정 자체의 미완료로 해석하지 않습니다.
+
+## 실제 제작·운영 검증
+
+2026-10-21 발행된 **SF Team 게임 제작 가이드 v3.2**의 운영 절차와 화면을 참고했습니다. 이 문서는 제작자가 직접 검증한 공정을 설명합니다.
+
+- **플랜 저장·재조회:** 일반 GPT 부계정의 검증 #91에서 HTTP 200, 문서 v1 → v2, 저장 내용 readback과 실제 허브 화면 반영을 확인했습니다.
+- **동시 편집 보호:** 관리자 Chrome과 승인 팀원 Edge가 같은 문서를 수정했을 때 오래된 버전의 저장은 거절되고 기존 초안은 보존됐습니다.
+- **구현 인계:** Spec ID·Revision과 확정 플랜·설계를 기준으로 Codex에 연결하는 구현 화면과 인계 절차를 운영했습니다.
+- **수용·발행:** SPEC-74 R3에서는 구현 항목 20개 완료, 기술 검증 18개 PASS, 제작자 수락과 CURRENT 발행을 기록했습니다.
+
+가이드의 **GitHub 댓글 중계**는 당시 사용·검증한 역사적 연결 방식입니다. 현재 ProjectSF 기본 경로에서는 사용하지 않으며, 연결 가능한 Team Hub MCP 또는 정식 Agent API를 따릅니다. 직접 쓰기 도구를 제공받지 못한 GPT 계정은 GPT에서 플랜을 작성한 뒤 Codex가 정식 API로 적용·재조회할 수 있습니다.
 
 ### 제작 공정에서 확인한 변경
 
@@ -76,10 +87,10 @@ Issue #74에서 Team Hub 자체를 기존 기능과 대조해 정식 요구·검
 - 서버 receipt와 readback으로 실제 저장된 결과와 현재 Gate를 확인하고 중복 요청·버전 충돌·중단의 처리를 분리했습니다.
 - CURRENT 발행 전에 검증, 필수 가이드, 원격 `main` 포함 확인을 각각 요구하도록 했습니다.
 
-## 현재 한계와 후속 작업
+## 별도로 남은 배포·확장 과제
 
-- 팀원별 다른 ChatGPT 개인 계정·모바일 환경에서 전체 쓰기 Workflow가 동일하게 동작하는지는 미검증입니다. 기존 플러그인 설치 방식과 연결 권한 문제가 남아 있으며 [#93](https://github.com/islandnboy/ProjectSF/issues/93)은 별도의 진행 중인 R&D입니다.
-- [#87](https://github.com/islandnboy/ProjectSF/issues/87)의 **GPT 주도 항목별 설계·합의 및 UML 선택화**는 제안·검토 중인 별도 과제입니다. 기존 배포 버전에서 구현 완료된 것으로 설명하지 않습니다.
+- **플러그인 배포(#93):** 팀원들이 각자 개인 ChatGPT 계정에서 같은 Hub MCP에 접근·쓰기할 수 있도록 플러그인을 연결·설치·배포하는 문제가 남아 있습니다. Android/iOS의 타 계정 전체 경로도 실증 대상입니다. **이 문제는 제작 공정의 설계·실행·검증 실패가 아니라 클라이언트 배포·접근 경계 문제입니다.** 기존 서버 MCP와 Agent API를 우선 재사용합니다.
+- **공정 개선(#87):** GPT 주도 항목별 순차 설계와 UML 선택화는 후속 개선 과제입니다. 현재 구현·검증된 공정과 구분합니다.
 - 변경 기록의 `FINAL / PARTIAL` 토큰 통계를 측정되지 않은 실행까지 포함한 총비용이나 생산성 향상 수치로 사용하지 않습니다.
 - 이번 공개 Snapshot에서는 비공개 Spec 본문·계정 권한·토큰·원본 작업 기록을 제공하지 않습니다.
 

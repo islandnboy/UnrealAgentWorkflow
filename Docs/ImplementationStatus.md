@@ -12,13 +12,13 @@
 | 검증 | Requirement → Implementation → Validation → Evidence. Tool 실행 성공과 제품 완료 구분 |
 | 품질 관리 | Creator 검수 후 Programmer가 완료 이슈들을 모아 구조·기능 품질 재검토 |
 
-실제 운영 계약은 [설계·책임](CreatorCentricProduction.md), [아키텍처](Architecture.md), [실행 모델](ExecutionModel.md)을 참고합니다. 일부 계정의 Team Hub 접근성과 Agent 제작 효율의 정량 개선은 별도 미검증입니다.
+실제 운영 계약은 [설계·책임](CreatorCentricProduction.md), [아키텍처](Architecture.md), [실행 모델](ExecutionModel.md)을 참고합니다. Creator가 Team Hub 제작 공정을 실제 운영·검증했습니다. 팀원 개인 ChatGPT 계정별 플러그인 배포·모바일 접근(#93)과 제작 효율의 정량 개선은 별도 평가 대상입니다.
 
 ## 기술 사례와 기록
 
 | 분야 | 확인된 설계·구현 및 과거 검증 | 남은 범위 |
 | --- | --- | --- |
-| [SF Team Hub](../CaseStudies/TeamHubProduction.md) | Issue·Spec 병행 경로와 SPEC-74 R3 CURRENT 발행. 공개 v133 기록: **구현 20개 완료, 기술 검증 18개 PASS, 제작자 수락** | 팀원 개인 계정·모바일 쓰기 미검증, #87 설계 개편 미완료 |
+| [SF Team Hub](../CaseStudies/TeamHubProduction.md) | **제작 공정 운영·검증**. SPEC-74 R3 CURRENT 발행, 구현 20개 완료·기술 검증 18개 PASS·제작자 수락. 가이드 v3.2의 문서 저장·충돌 처리 사례 | 별도 플러그인 배포·모바일 연결 검증(#93), 후속 설계 개선(#87) |
 | [RPCNet](../CaseStudies/RPCNet.md) | Runtime·Session·Transport·Codec, C# ProtocolGenerator, Consumer Integration. **당시 테스트 37개 및 Unreal 상호운용성 PASS** | 대규모 실서비스 latency/throughput 개선 수치 없음 |
 | [Online Server](../CaseStudies/ServerProduction.md) | Gateway/AS/GS, 영속 Player/World, Local UE Login→PlayerScope. Foundation **52개**, Gateway 배포 **58개** 회귀 PASS는 **서로 다른 검증 시점** | Unreal DS Gameplay replication, Public TLS/WAN UE Client, 운영 HA/RDB 미완료 |
 | [DataForge](../CaseStudies/DataForge.md) | XLSX DataTable·Unreal Bake/Readback·Server JSON Parity. **당시 Core 25개 PASS** | 고급 타입·실제 모든 제작 소비자 전환 미완료 |
@@ -33,6 +33,6 @@
 - 새 선형 탐험형 월드의 제작·성능 검증 (이전 GIS 근거와 구분)
 - 월드 변경 보호 Gate의 완전한 Runtime 연동 (2026-10-13 문서에 UNIMPLEMENTED)
 - DataForge 고급 Adapter·실제 소비자 전체 전환
-- 팀원별 개인 ChatGPT 계정·모바일 환경에서 Team Hub Spec 쓰기와 배포 권한 검증
+- 제작 공정 검증과 별개인 팀원별 ChatGPT 플러그인 배포 및 모바일 직접 쓰기 연결 검증 (#93)
 - 동일 조건의 토큰·시간·인력 절감 효과 측정
 - Public/WAN Unreal Client 및 운영 수준 다중 지역 서버 배포
