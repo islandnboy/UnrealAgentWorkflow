@@ -1,6 +1,6 @@
-# Project SF Server Architecture
+# Project SF 서버 아키텍처
 
-> Status: **Public Architecture Reference / 2026-10-07 Snapshot**
+> 상태: **공개용 아키텍처 참고본 / 2026-10-07 Snapshot**
 >
 > ProjectSF의 기존 ServerArchitecture 문서에서 Topology·책임·Authority·데이터 경계 설계 부분을 발췌한 공개 참고본입니다. 작업 저장소의 단일 원본과 구분하며, 목표 구조·초기 단계 설명은 현재 구현 완료 범위를 의미하지 않습니다.
 >
@@ -12,16 +12,16 @@ Project SF의 온라인 서버는 Client의 진입, 계정 인증, 게임 서비
 
 현재 Foundation은 작게 시작하되, 이후 다중 AS/GS와 Multi-Region으로 확장해도 Client 및 Domain Service 계약을 불필요하게 변경하지 않는 것을 목표로 한다.
 
-## 2. Target Topology
+## 2. 목표 서비스 구성
 
 ```text
 Client
   ↓
 Gateway
-  ├─ future: Global / Region Routing
-  ├─ Load Balancing
-  ├─ Health Check / Failover
-  ├─ TLS / connection limits; future: Maintenance Routing
+  ├─ 향후 전체 / 지역별 경로 선택
+  ├─ 부하 분산
+  ├─ 상태 확인 / 장애 전환
+  ├─ TLS / 연결 제한, 향후 점검 경로 선택
   ↓
 Account Server Cluster
   ↓
@@ -33,18 +33,18 @@ Repository / Persistence Boundary
   ├─ Cache            (Redis-class, optional)
   └─ Primary DB       (RDB-class, Source of Truth)
 
-future:
+향후 범위:
 Game Server ↔ Unreal Dedicated Server
 ```
 
-### Multi-Region Expansion
+### 다중 지역 확장
 
 ```text
 Client
   ↓
 Gateway
   ↓
-Region Selection
+지역 선택
   ├─ KR → Regional AS/GS
   ├─ JP → Regional AS/GS
   └─ US → Regional AS/GS
@@ -59,10 +59,10 @@ Client
   ↓
 Gateway
   ↓
-Configured AS
+설정된 AS
 ```
 
-## 3. Responsibility / Authority
+## 3. 책임과 권한
 
 ### Gateway
 
@@ -93,13 +93,13 @@ Configured AS
 - World 진입 및 persistent content service coordination
 - Unreal Dedicated Server의 실시간 Gameplay Authority와 분리한다.
 
-### Dedicated Server (DS, future)
+### Dedicated Server (DS, 향후 범위)
 
 - Unreal Gameplay Framework authority
 - movement / combat / GAS / physics 등 실시간 simulation
 - persistent content의 최종 SoT가 아니다.
 
-## 4. Persistence
+## 4. 데이터 영속화
 
 AS/GS의 비즈니스 로직은 Redis/PostgreSQL/MySQL/SQLite 같은 구체 backend를 직접 알지 않는다.
 
@@ -118,15 +118,15 @@ Primary DB
 일반적인 cache-aside 방향을 기본으로 한다.
 
 ```text
-Read:
+조회:
 Repository
-  → Cache hit: return
-  → Cache miss: DB read → cache fill → return
+  → Cache 적중: 결과 반환
+  → Cache 미적중: DB 조회 → Cache 저장 → 반환
 
-Write:
+쓰기:
 Repository
-  → DB write
-  → cache invalidate/update
+  → DB에 기록
+  → Cache 무효화 / 갱신
 ```
 
 원칙:
@@ -137,7 +137,7 @@ Repository
 - Redis와 운영 RDB 도입은 Repository/Persistence 경계 뒤에서 교체한다.
 - 별도의 custom “DB Cache Server”를 선행 구축하지 않는다. 실제 scale/ownership 요구가 생길 때만 Data Service 분리를 검토한다.
 
-## 5. Network / Protocol Boundary
+## 5. 네트워크 / 프로토콜 경계
 
 ```text
 Transport
@@ -163,7 +163,7 @@ Repository
 
 관련 RPCNet 경계는 [RPCNet Case Study](../../CaseStudies/RPCNet.md)를 따른다.
 
-## 6. Initial Foundation Scope
+## 6. 초기 기반 작업 범위
 
 초기 Server Foundation의 제품 목표는 **서버 프로세스를 실행하고 Client/Bot이 Gateway를 통해 AS Login을 성공시키는 것**이다.
 
@@ -174,7 +174,7 @@ Gateway
   ↓
 AS
   ↓
-Login Result
+로그인 결과
 ```
 
 이 단계에서 필요한 기반:
@@ -197,23 +197,23 @@ Login Result
 
 World Entry와 PlayerScope는 후속 Game Session / Content 단계에서 이 문서를 확장하지 않고 소비한다.
 
-## 7. Local vs Production
+## 7. 로컬 개발과 운영 환경
 
-### Local / Early Development
+### 로컬 / 초기 개발
 
 ```text
-Bot or Client
+Bot 또는 Client
   ↓
 Gateway (single AS passthrough)
   ↓
 AS
   ↓
-optional GS
+선택적 GS
   ↓
-lightweight persistence
+경량 영속화
 ```
 
-### Future Production
+### 향후 운영 환경
 
 ```text
 Client
@@ -230,7 +230,7 @@ GS Cluster
   ↓
 Cache + Primary DB
   ↕
-DS fleet as required
+필요에 따라 DS 확장
 ```
 
 운영 확장 요구가 생기기 전에 microservice, Redis, orchestration, 별도 Registry service를 강제하지 않는다.

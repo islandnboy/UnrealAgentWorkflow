@@ -1,28 +1,28 @@
-# Server Production Case Study
+# 온라인 서버 제작 사례
 
-## Online game service foundation
+## 온라인 게임 서비스 기반
 
 ProjectSF 서버는 단일 게임 서버 프로세스에 모든 책임을 넣지 않고 **외부 진입, 인증, 영속 게임 상태, 향후 실시간 Gameplay simulation**을 분리합니다.
 
 Agent Workflow는 이 서버 작업에도 동일한 Issue / Step / Skill / Evidence 모델을 적용합니다.
 
-## Architecture references
+## 참고 아키텍처
 
 - [Server Architecture / Topology](../Docs/Server/ServerArchitecture.md) — 기존 구조 문서에서 선별한 토폴로지·Authority·Persistence·Protocol 경계
 - [Gateway Deployment Design](../Docs/Server/GatewayDeploymentDesign.md) — 기존 Gateway·AS 풀·Coordination·설치·런처 설계안의 공개 참고본
 
 목표 아키텍처와 설계안의 당시 검증 범위를 구분합니다. 후속 Client 연동과 검증 checkpoint는 이 사례의 Verification / Actual Unreal Client flow에서 확인합니다.
 
-## Target architecture
+## 목표 구조
 
 ~~~text
 Client
   ↓
 Gateway
-  ├─ health / failover
-  ├─ connection load balancing
-  ├─ TLS ingress
-  └─ future region routing
+  ├─ 상태 확인 / 장애 전환
+  ├─ 연결 분산
+  ├─ TLS 외부 진입
+  └─ 향후 지역별 경로 선택
   ↓
 Account Server Cluster
   ↓
@@ -31,60 +31,60 @@ GameServer Directory / Registry
 Game Server Cluster
   ↓
 Repository / Persistence
-  ├─ optional Cache
+  ├─ 선택적 Cache
   └─ Primary DB
 
-future:
+향후 범위:
 Game Server ↔ Unreal Dedicated Server
 ~~~
 
-## Authority boundaries
+## 권한과 책임 경계
 
 ### Gateway
 
-- public service entry point
-- business-opaque forwarding
-- health checked AS pool
-- connection load balancing
-- TLS / connection limits
-- future region / maintenance routing
+- 공개 서비스 진입점
+- 비즈니스 메시지 의미를 해석하지 않는 전달
+- 상태 검사를 통과한 AS 풀
+- 연결 부하 분산
+- TLS / 연결 제한
+- 향후 지역 / 점검 경로 선택
 
-### Account Server
+### 계정 서버(AS)
 
-- account / authentication
-- login session and GS handoff ticket
-- GS selection
+- 계정 / 인증
+- 로그인 세션과 GS 인계 티켓
+- GS 선택
 - persistent gameplay traffic relay는 하지 않음
 
 ### GameServer Directory
 
-- GS registration
-- heartbeat / health
-- capacity / version metadata
-- routing decision
+- GS 등록
+- Heartbeat / 상태 확인
+- 수용량 / 버전 메타데이터
+- 연결 대상 선택
 
 초기에는 AS 내부 logical component로 유지하고 scale 필요 전 별도 service로 강제 분리하지 않습니다.
 
-### Game Server
+### 게임 서버(GS)
 
 - Player
 - Character
 - Inventory
 - Quest / Party
-- World persistent state
+- World 영속 상태
 - PlayerScope
 
-### Unreal Dedicated Server — future
+### Unreal Dedicated Server — 향후 범위
 
-- movement
-- combat
+- 이동
+- 전투
 - GAS
-- physics
-- realtime gameplay simulation
+- 물리
+- 실시간 게임플레이 시뮬레이션
 
 Persistent Player / World 데이터의 최종 SoT와 realtime simulation authority를 구분합니다.
 
-## Persistence boundary
+## 영속화 책임 경계
 
 ~~~text
 AS / GS
@@ -93,7 +93,7 @@ Domain Service
   ↓
 Repository
   ↓
-Cache optional
+선택적 Cache
   ↓
 Primary DB
 ~~~
@@ -102,7 +102,7 @@ Primary DB
 
 Peer AS가 authority SQLite 파일을 직접 열지 않고 RPCNet을 통해 접근하도록 하여 향후 RDB 교체 경계를 보존합니다.
 
-## RPCNet integration
+## RPCNet 연동
 
 새 Server 통신은 RPCNet protobuf / generated contract를 사용합니다.
 
@@ -119,45 +119,45 @@ Transport
 
 RPCNet은 통신 infrastructure를 제공하고, Server가 Account / Player / World semantics를 소유합니다.
 
-## Local deployment system
+## 로컬 배포 구성
 
 개인 개발 환경에서도 실제 service topology를 검증할 수 있도록 다음 기반을 구성했습니다.
 
 - Gateway
-- multiple AS / GS profile
-- health / readiness
-- weighted connection balancing
+- 다중 AS / GS 실행 프로필
+- 상태 확인 / 실행 준비 상태
+- 가중치 기반 연결 분산
 - TLS ingress
 - Launcher / Supervisor
-- account registration
-- Bot verification
-- log / backup / staged update path
-- self-contained win-x64 package
+- 계정 등록
+- Bot 검증
+- 로그 / 백업 / 단계적 업데이트 절차
+- 별도 Runtime 설치를 최소화한 win-x64 배포 패키지
 
 운영 scale이 필요하기 전 Redis, microservice, orchestration을 무조건 도입하지 않는 것이 설계 원칙입니다.
 
-## Verification
+## 검증 기록
 
-### Server foundation current-phase gate
+### 서버 초기 기반 검증
 
 현재 Architecture에 기록된 current-phase server gate:
 
-- Server + external Bot PASS
-- clean build **0 warnings / 0 errors**
-- **52 tests PASS**
+- 서버와 외부 Bot 연동 PASS
+- 빌드 결과 **경고 0건 / 오류 0건**
+- **테스트 52개 PASS**
 
-### Gateway deployment checkpoint
+### Gateway 배포 검증 시점
 
 Gateway / shared coordination / TLS를 확장한 별도 deployment checkpoint에서는:
 
-- clean Release build PASS
-- **58-test clean regression PASS**
-- weighted live-connection distribution targeted test PASS
-- packaged file integrity PASS
+- Release 빌드 PASS
+- **회귀 테스트 58개 PASS**
+- 가중치 기반 실제 연결 분산의 개별 검증 PASS
+- 패키지 파일 무결성 검사 PASS
 
 58개 regression + targeted test를 하나의 59-test full-suite 실행으로 과장하지 않고 별도 검증으로 기록합니다.
 
-## Actual Unreal Client flow
+## 실제 Unreal Client 연동 흐름
 
 후속 Client integration에서는 실제 UE Client가 서버 흐름을 소비합니다.
 
@@ -165,9 +165,9 @@ Gateway / shared coordination / TLS를 확장한 별도 deployment checkpoint에
 Entry
 → Login UI
 → Gateway
-→ Account authentication
-→ automatic GS admission
-→ initial PlayerScope
+→ 계정 인증
+→ 자동 GS 입장
+→ 초기 PlayerScope 적용
 → NeoSeoul OpenLevel
 ~~~
 
@@ -175,46 +175,46 @@ GameInstance가 LoginFlowCoordinator를 소유하고, AS / GS ConnectionHandler�
 
 실제 검증에는 다음이 포함됩니다.
 
-- SFEditor UHT / C++ / DLL build PASS
-- real Gateway / AS / GS process execution
-- login widget submit
-- authentication failure
-- GS disconnect cleanup
-- relogin
-- server restart
-- initial PlayerScope application
-- Entry → NeoSeoul travel
+- SFEditor UHT / C++ / DLL 빌드 PASS
+- Gateway / AS / GS 실제 프로세스 실행
+- 로그인 Widget 제출
+- 인증 실패 처리
+- GS 연결 끊김 정리
+- 재로그인
+- 서버 재시작
+- 초기 PlayerScope 적용
+- Entry → NeoSeoul 맵 이동
 
-## Explicit limits
+## 아직 완료로 주장하지 않는 범위
 
 현재 포트폴리오에서 완료된 것으로 주장하지 않는 항목:
 
-- public WAN Client
-- production HA
-- shared production RDB
-- production Redis/cache deployment
-- packaged-game end-to-end
-- Unreal Dedicated Server gameplay replication
-- multi-region production deployment
+- 공용 WAN 환경의 Client 실행
+- 운영 수준 고가용성(HA)
+- 운영용 공유 RDB
+- 운영용 Redis / Cache 배포
+- 패키징 게임의 전체 연동
+- Unreal Dedicated Server 게임플레이 복제
+- 운영 수준의 다중 지역 배포
 
-## Agent Workflow connection
+## Agent Workflow와의 연결
 
 ~~~text
 Issue / Goal
-→ Current Source of Truth
+→ 현재 원본 확인
 → server-feature-production Skill
-→ Architecture / authority inspection
-→ RPCNet contract impact
-→ implementation
-→ build / deterministic tests
-→ Bot / real process verification
-→ Client integration when required
+→ 구조 / 권한 경계 조사
+→ RPCNet 계약 영향 검토
+→ 구현
+→ 빌드 / 결정론적 테스트
+→ Bot / 실제 프로세스 검증
+→ 필요한 경우 Client 연동
 → Evidence
 ~~~
 
 서버 기능이 추가될 때 topology 전체를 매번 다시 설계하지 않고 기존 Authority와 Extension Point 안에서 확장합니다.
 
-## Portfolio point
+## 이 사례의 핵심
 
 이 Case Study의 핵심은 단순한 로그인 서버 구현이 아닙니다.
 
