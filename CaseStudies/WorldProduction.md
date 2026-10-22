@@ -110,4 +110,4 @@ World Partition 셀 경계, Landscape proxy 경계, 행정구역 경계와 제�
 
 ## Screenshots and workflow example
 
-[Agent-Driven Game Production 사례](AgentDrivenGameProduction.md#월드-제작-파이프라인을-만들고-실제-지역에-적용)에서 월드 제작 공정, 도로 전후 화면, 지역 rough와 검증 경계를 함께 확인할 수 있습니다.
+[Agent-Driven Game Production 사례](AgentDrivenGameProduction.md#이전-neoseoul-월드-제작-파이프라인을-실제-지역에-적용)에서 월드 제작 공정, 도로 전후 화면, 지역 rough와 검증 경계를 함께 확인할 수 있습니다.

@@ -43,6 +43,8 @@ Production/
 - [Context Budget Policy (curated public summary)](ContextBudgetPolicy.md)
 - [Execution Observability (curated public summary)](ExecutionObservability.md)
 - [Task Execution (verbatim source)](TaskExecution.md)
+- [Programming rule (curated)](Rules/Programming.md)
+- [Verification Depth rule (verbatim source)](Rules/VerificationDepth.md)
 - [UI Production Skill (verbatim source)](Skills/ui-production/SKILL.md)
 - [Road Production Skill (verbatim source)](Skills/road-production/SKILL.md)
 - [Inspection scope and limitations](../../Docs/SourceAudit-2026-10-22.md)

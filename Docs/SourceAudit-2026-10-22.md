@@ -23,6 +23,10 @@ This is a **selected publication snapshot**, not a branch mirror, fork, or indep
 
 **ProjectSF source documents:** `AGENTS.md`; `AI/Workflows/{CommonAIWorkflow,TaskExecution,ProductionConvergence,ProductionEvolution,ContextBudgetPolicy,ExecutionObservability,SubAgentDelegation}.md`; `AI/Rules/{Programming,VerificationDepth,ResourceProduction,FailureRecovery}.md`; `AI/Skills/{road-production,ui-production,issue-context-sync,discussion-convergence,world-structure,world-validation}/SKILL.md`; `Docs/Project/{Vision,ProjectIntroduction,ProjectOverview}.md`; `Docs/Production/Recipes/{Overview,README,RecipeFormat}.md`; `Docs/Development/AgentWorkflow/{Architecture,MaintenancePolicy,AgentLean,CreatorProductionGuide,SharedProductionGuide,SharedProductionReview,SFTeamHubAgentAPI,SFTeamHubGitHubRelay,WorldMutationGate}.md`; `Docs/Technical/Architecture/GeoWorldProductionArchitecture.md`; `Docs/Production/World/NeoSeoulFoundationComparison.md`; `Production/Evidence/README.md`. Full file responses were retrieved, and relevant sections, rules, headings, and status markers were inspected; long files received **selective inspection**, not a line-by-line certification.
 
+## Additional dated evidence inspected
+
+The following **historical text checkpoints** were also retrieved to check interpretation, without rerunning them: `Production/Evidence/Issue-54/District-Expansion-20261008/ClosureReview-20261008/README.md`, `Production/Evidence/Issue-64/CameraDistanceStage4-20261014.md`, `Production/Evidence/Issue-28/MainIntegration-20261007/Result.md`, `Production/Evidence/Issue-62/ValidationReport-20261009.md`, `Production/Evidence/MainIntegration-20261016.md`, and `Docs/Development/AgentWorkflow/Reviews/AgentLeanReview-20260920.md`. Contract text of `AI/Rules/{Programming,VerificationDepth}.md` was further inspected for safe publication. These are scoped checkpoints, not evidence of new-world completion or renewed PASS.
+
 ## Not inspected / not verified
 
 - **Not read:** C++, headers, C#/Python/JS/TS source, scripts, executable runtime, binaries, Unreal `.uasset`/`.umap`, and unpublished local changes. A file tree only confirms presence, not behavior.
@@ -44,9 +48,19 @@ This is a **selected publication snapshot**, not a branch mirror, fork, or indep
 
 - [x] Inspect both main trees and prior portfolio before edits.
 - [x] Separate inspected files from inventory-only and unverified scope.
-- [ ] Apply only selected documentation/snapshot updates.
-- [ ] Review changed Markdown for inadvertent private material.
-- [ ] Verify local Markdown links and source-attribution paths in the public repository.
-- [ ] Read back final portfolio `main`, record commit and unresolved checks.
+- [x] Apply only selected documentation/snapshot updates.
+- [x] Review new public snapshots for obvious credentials/endpoints and preserve private operational instructions outside publication. This is a scoped review, not a security audit.
+- [x] Verify local Markdown **path targets** against the public repository tree (29 Markdown files checked before adding this final rule snapshot); the changed heading-anchor reference was repaired. External destination reachability, full anchor rendering, PDFs and image correctness were not dynamically validated.
+- [x] Read back committed public `main` tree and compare verbatim snapshot blob SHAs; final branch check follows this audit update.
 
 This checklist is updated during publication.
+## Publication changes and provenance
+
+- 2026-10-22: core portfolio documentation aligned to the current Issue / Spec / direct-request contract; historical GIS world work explicitly labelled as prior prototype evidence.
+- **Verbatim, SHA-equal Git blobs** as of the pinned source commit:
+  - `AI/Workflows/TaskExecution.md` → `Reference/ProjectSF/TaskExecution.md` (`bc132d2580ab88544c5faea0378bf526494cdfcc`)
+  - `AI/Skills/ui-production/SKILL.md` → `Reference/ProjectSF/Skills/ui-production/SKILL.md` (`fb85610c4204791137dbd51947f7ab1c60665999`)
+  - `AI/Skills/road-production/SKILL.md` → `Reference/ProjectSF/Skills/road-production/SKILL.md` (`0b786742cbd62967c855c67e90c24392798bfef1`)
+  - `AI/Rules/VerificationDepth.md` → `Reference/ProjectSF/Rules/VerificationDepth.md` (`4d0fb4098382e41c4e0af8269d80d70633ddda14`)
+- **Curated public explanations:** `Reference/ProjectSF/{ContextBudgetPolicy,ExecutionObservability}.md`, `Reference/ProjectSF/Rules/Programming.md` and the public architectural/case-study documentation. These are not claimed to be byte-for-byte source.
+- Documentation-only publication: no source engine implementation, production mutation, build/PIE, Owner review, or new test results.
