@@ -2,9 +2,9 @@
 
 **UnrealAgentWorkflow**는 AI Agent와 사람이 같은 제작 계약을 공유하며 Unreal Engine 개발·제작 결과를 반복 개선하는 워크플로 R&D입니다.
 
-개인 프로젝트 **ProjectSF (Unreal Engine 5.8)**에서 실제로 사용한 운영 구조와 제작 사례를 정리합니다. 게임 작업 저장소는 비공개이며, 이 저장소에는 공개용으로 선별한 문서·사례·참고 자료를 담습니다.
+개인 프로젝트 **ProjectSF (Unreal Engine 5.8 계열)**의 운영 구조와 제작 사례를 정리합니다. 비공개 **ProjectSF가 Source of Truth**이며 이 공개 저장소는 설명과 선별 원본의 Snapshot이지 별도 범용 프레임워크가 아닙니다. 문서 기준: ProjectSF `main` `08715c68b04f` (2026-10-22).
 
-**프로젝트 인원 구성:** 기획 3명 · 프로그래머 1명 · PM 1명 입니다.
+**제작 모델:** 기획·프로그래밍·운영 등 전문성을 결합하는 소규모 팀 R&D이며, 인원 수를 고정 계약으로 주장하지 않습니다.
 
 ## 둘러보기
 
@@ -29,15 +29,20 @@ Creator는 특정 직군이 아니라 설계와 실제 결과를 책임지는 �
 요청을 실행 가능한 작업으로 나누고, 최신 상태와 검증 근거를 바탕으로 다음 행동을 결정합니다.
 
 ```text
-요청 / Issue → 최신 저장소·Issue·Workflow 확인 → Rule·Skill·Recipe 선택
-→ 제작 도구 / Unreal MCP 실행 → 제품 결과 검증·Evidence → 수정 및 다음 Step
+Creator 요청 → Issue (경량 제작) / Spec (플랜·설계) / 직접 작업 선택
+→ 선택한 경로의 최신 원본 및 저장소 확인 → 공식 기능·기존 구조 우선
+→ 필요한 Rule·Skill·Recipe → AI Agent 구현·기본 회귀 검증
+→ 제품 결과·Evidence → Creator 검수
+→ 완료 이슈를 모아 Programmer가 구조·기능 품질 검토
+→ 리팩터링 / Workflow·Skill·Guideline 개선
 ```
 
-**Agent는 작업의 의미와 다음 행동을 판단하고, Runtime은 실행과 검증을 담당합니다.** 도구 실행 성공만으로 완료를 판정하지 않고, 실제 제품 결과와 목표의 Acceptance를 확인합니다.
+**Standard First, Simple is Best.** 공식 엔진·Codex 기능과 기존 구현을 우선 확인하고 불필요한 Manager/Router/Framework를 추가하지 않습니다. **AI Agent는 의미와 다음 행동을 판단하고, Runtime은 결정론적 실행·검증을 지원합니다.** 도구 실행 성공만으로 완료를 판정하지 않고, 실제 제품 결과와 목표의 Acceptance를 확인합니다.
 
 | 문서 | 다루는 내용 |
 | --- | --- |
-| [Execution Model](Docs/ExecutionModel.md) | 최신 상태 확인, 작업 분리, Step 실행과 완료 판정 |
+| [Execution Model](Docs/ExecutionModel.md) | Issue·Spec·직접 작업, 최신 상태와 완료 판정 |
+| [TaskExecution source snapshot](Reference/ProjectSF/TaskExecution.md) | 실제 원본의 일반 작업 계약 |
 | [Creator Workflow](Docs/CreatorWorkflow.md) | 제작자의 요청, 직접 제작·검토·수정, 다음 작업 연결 |
 | [Designer Production](CaseStudies/DesignerProduction.md) | 기획 의도를 제작 계약과 결과 검증으로 연결한 사례 |
 | [Agent-Driven Game Production 사례](CaseStudies/AgentDrivenGameProduction.md) | 월드·전투·MetaHuman 제작 과정, 실제 화면과 데이터 연결 구조 |
@@ -59,7 +64,7 @@ Creator는 특정 직군이 아니라 설계와 실제 결과를 책임지는 �
 | [World Production](CaseStudies/WorldProduction.md) | 지형·도로·수계 등 Unreal 월드 제작 과정 |
 | [UI Production](CaseStudies/UIProduction.md) | Unreal UI 제작과 검증 과정 |
 
-참고: [ProjectSF 공개 자료 범위](Reference/ProjectSF/README.md) · [Samples](Samples/README.md)
+참고: [ProjectSF 공개 자료 범위](Reference/ProjectSF/README.md) · [실사 범위와 미확인 항목](Docs/SourceAudit-2026-10-22.md) · [Samples](Samples/README.md)
 
 ## Network
 
@@ -86,5 +91,7 @@ Creator는 특정 직군이 아니라 설계와 실제 결과를 책임지는 �
 ## 현재 상태
 
 **Portfolio / Active R&D.** 적용·검증된 범위와 연구 중인 항목은 [Implementation Status](Docs/ImplementationStatus.md)에서 구분합니다.
+
+기존 GIS·NeoSeoul 월드 제작은 **이전 프로토타입의 검증 사례**이며, 2026-10-14 이후의 압축된 선형 탐험형 신규 월드가 검증됐다는 뜻이 아닙니다.
 
 사례에 기록된 테스트·연동 결과는 해당 검증 시점의 근거입니다. 기술 검증, 화면 결과 검토, 최종 제작 승인도 구분해 기록합니다. 비공개 게임 코드·원본 데이터·Issue·Production Evidence 전체는 공개하지 않습니다.

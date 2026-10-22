@@ -1,15 +1,18 @@
 # Implementation Status
 
+> **문서 실사 기준:** ProjectSF `main` `08715c68b04f` (2026-10-22). 아래는 원본 계약과 과거 검증 기록의 정리입니다. 이번 갱신에서 코드·Unreal Editor·새 테스트를 실행하지 않았습니다. [읽은 범위와 미확인 사항](SourceAudit-2026-10-22.md)을 함께 확인하세요.
+
 이 문서는 실제 ProjectSF 운영 구조와 공개 포트폴리오 설명을 맞추기 위한 상태표입니다.
 
-## Implemented and actively used
+## Documented operating model (not newly runtime-verified)
 
 ### Workflow
 
 - repository `AGENTS.md` bootstrap gate
 - Current Source of Truth Gate
-- Issue start / resume contract
-- Issue / Recipe partition gate
+- Issue start / resume 및 Issue / Recipe partition gate
+- Team Hub Spec / Revision / Stage / Gate contract (개별 계정 플러그인 가용성 미검증)
+- 영속 일감 없이 직접 작업하는 경로
 - TaskExecution
 - ProductionConvergence
 - ProductionEvolution
@@ -30,6 +33,7 @@
 - world structure / validation
 - server feature production / bot verification
 - issue context sync
+- discussion convergence / Spec page tools
 
 ### Runtime
 
@@ -48,7 +52,8 @@
 
 - `Production/Data`
 - `Production/Evidence`
-- Issue-driven persistent task state
+- Issue 경로: GitHub Issue의 영속 업무 상태
+- Spec 경로: Team Hub의 Revision / Stage / Gate / 확정 Plan·설계·UML
 - human / AI shared production state
 - input revision and validation evidence
 
@@ -91,7 +96,7 @@
 
 ### Unreal production
 
-Current applied areas include:
+Historical prototype records and production documents cover:
 
 - terrain and landscape
 - road batch production
@@ -103,14 +108,20 @@ Current applied areas include:
 
 ## Active R&D
 
-- structured WorkflowSnapshot / execution materialization without restoring the old keyword Prompt Compiler
-- larger-scale city production orchestration
+- cross-account Spec 연결·쓰기를 포함한 실제 배포/권한 검증
+- Context handoff와 비용·토큰 효율의 동일 조건 측정 (실측 없는 절감률 미주장)
+- 새 선형 탐험형 어드벤처 월드의 압축/절차 제작 검증; 과거 GIS 증거와 별개
 - production performance measurement for road / water / world output
+- world mutation gate: 2026-10-13 설계 문서에는 **runtime integration UNIMPLEMENTED**로 명시
 - more reusable batch execution around verified Recipes
 - stronger human ↔ AI round-trip editing evidence
 - DataForge advanced data types and production consumer rollout
 - production-grade Server HA / RDB / WAN deployment
 - continued reduction of duplicated rules and stale workflow paths
+
+## Historical verification boundary
+
+RPCNet의 37, Server의 52, DataForge의 25 테스트 등 수치는 이전 시점의 checkpoint 기록입니다. **2026-10-22에 재실행하지 않았으며** 최신 전체 제품 PASS나 Creator 승인의 근거로 승격하지 않습니다.
 
 ## Not claimed
 

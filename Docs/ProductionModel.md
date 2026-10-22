@@ -1,5 +1,7 @@
 # Production Model
 
+이 문서는 ProjectSF의 운영 원리를 공개용으로 설명하며, 별도의 범용 실행 프레임워크를 정의하지 않습니다.
+
 ## Human + AI shared production
 
 ProjectSF에서는 사람과 AI를 서로 다른 제작 파이프라인으로 분리하지 않습니다.
@@ -58,7 +60,7 @@ AI는 방법을 판단하고, 반복 가능한 기계적 실행은 Tool에 넘�
 - input revision
 - tool / parameter provenance
 
-Goal과 Current State를 Evidence 폴더에 복제하지 않습니다. 업무 상태는 Issue가 소유합니다.
+Goal과 Current State를 Evidence 폴더에 복제하지 않습니다. Issue 경로는 GitHub Issue, Spec 경로는 Team Hub, 직접 작업은 현재 요청이 범위·승인 원본입니다.
 
 ## Progressive convergence
 

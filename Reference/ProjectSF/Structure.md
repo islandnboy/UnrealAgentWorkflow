@@ -64,7 +64,9 @@ Production/
 
 - Data: 승인된 입력
 - Evidence: 실행·검증 근거
-- Issue: Goal / Acceptance / current state
+- GitHub Issue: Issue 제작의 Goal / Acceptance / current state
+- SF Team Hub: Spec / Revision / Stage / Gate / Plan·design 원본
+- Direct request: 영속 일감이 필요 없는 요청의 범위
 - Docs: 장기 제품·기술·제작 계약
 
 ## Codex skill discovery

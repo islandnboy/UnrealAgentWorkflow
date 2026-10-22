@@ -1,10 +1,12 @@
 # Architecture
 
+**2026-10-22 snapshot:** ProjectSF `main` `08715c68b04f`. 이는 공개용 설명이며 독립 실행형 프레임워크가 아닙니다. **Standard First, Simple is Best**를 따릅니다.
+
 현재 Agent Workflow의 구조는 ProjectSF에서 실제 운영 중인 Agent Workflow를 기준으로 합니다.
 
 ## 1. Repository entry
 
-모든 실제 작업은 저장소 루트의 `AGENTS.md`에서 시작합니다.
+실제 ProjectSF 작업은 원본 저장소 루트의 `AGENTS.md`에서 시작합니다.
 
 `AGENTS.md`는 거대한 정책 문서가 아니라 다음 역할만 가집니다.
 
@@ -36,12 +38,14 @@ Codex의 repository Skill 자동 발견을 위해 `.agents/skills/<name>/SKILL.m
 | `AGENTS.md` | bootstrap, routing | 제품 설계, 도구 구현 |
 | `AI/Workflows` | 실행 상태, 재개, Step 전환, 완료 판정 | 제품 고유 규칙 |
 | `AI/Rules` | 공통 안전·품질 불변 조건 | 특정 작업 계획 |
-| `AI/Skills` | 전문 판단, 입력 확인, 검증 방법 | 실제 프로젝트 class/path 복제 |
+| `AI/Skills` | 전문 판단, 입력 확인, 검증 방법, 필요한 프로젝트 제약 | 작업 상태·승인 원본 |
 | `Docs/Production/Recipes` | 반복 가능한 제작 계약 | 매 실행의 상태 |
 | `Tools/AgentPipeline` | schema, registry, binding, preflight, evidence tooling | 자연어 의미 판단 |
 | `Production/Data` | 승인된 제작 입력 | workflow policy |
 | `Production/Evidence` | 실행 및 검증 증거 | Goal / task state |
-| GitHub Issue | Goal, Scope, Acceptance, current state, decisions | raw logs |
+| GitHub Issue | Issue 제작의 Goal, Scope, Acceptance, current state, decisions | Spec Stage / Gate |
+| SF Team Hub Spec | Spec Revision, Stage, Gate, 확정 Plan, design/UML | Issue state |
+| Direct request | 영속 일감 불필요한 현재 요청의 승인 범위 | Issue/Spec 자동 생성 |
 | `Docs` | 제품·기술·제작 설계 | Agent runtime state |
 
 ## 3. Agent vs Runtime
@@ -83,7 +87,7 @@ Runtime은 Agent 판단을 실행 가능한 형태로 검증합니다.
 
 - bootstrap
 - current source of truth
-- Issue restore / resume
+- Issue / Spec / 직접 작업의 원본 조회와 재개
 - authority boundary
 - Step transition
 - Main / Sub delegation
@@ -129,6 +133,11 @@ Skill은 직군 분업 단위가 아니라 **반복 가능한 전문 판단 단�
 ProjectSF의 현재 예:
 
 - issue-context-sync
+- discussion-convergence
+- sf-page-tools
+- ability-production
+- trigger-production
+- building-production
 - terrain-production
 - landscape-production
 - road-production
@@ -148,11 +157,14 @@ ProjectSF의 현재 예:
 대화 기억을 장기 상태 저장소로 사용하지 않습니다.
 
 ~~~text
-GitHub Issue
-  ├─ Goal / Scope / Acceptance
-  ├─ decisions
-  ├─ current state
-  └─ next action
+GitHub Issue (경량 제작)
+  └─ Goal / Scope / Acceptance / decisions / next action
+
+SF Team Hub (Spec 제작)
+  └─ Spec / Revision / Stage / Gate / confirmed Plan, design, UML
+
+Direct request (영속 일감 불필요)
+  └─ 허용 범위와 산출물
 
 Production/Evidence
   ├─ manifest
@@ -161,4 +173,4 @@ Production/Evidence
   └─ artifact references
 ~~~
 
-이 구조 덕분에 GPT, Codex, 다른 세션, 다른 작업자가 동일 Issue와 실제 저장소 상태를 읽고 재개할 수 있습니다.
+다른 세션에서도 Issue는 최신 GitHub Issue를, Spec은 Team Hub의 실제 ID·Revision을 다시 읽습니다. 기억이나 연결되지 않은 서비스 응답으로 현재 상태를 추측하지 않습니다.

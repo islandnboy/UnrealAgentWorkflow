@@ -1,5 +1,7 @@
 # Execution Model
 
+**Entry:** Issue (경량 제작), SF Team Hub Spec (플랜·설계·합의), 직접 작업 (영속 일감 불필요). 모든 작업에 Issue/Recipe 생성을 강제하지 않습니다.
+
 ## 1. Mandatory bootstrap gate
 
 실제 조사·진단·변경·제작 작업은 mutation 전에 실행 문맥을 먼저 확정합니다.
@@ -18,12 +20,11 @@
 
 ## 2. Current Source of Truth Gate
 
-Issue 작업의 기준은 이전 세션이 아니라 **현재 시점의 실제 상태**입니다.
+모든 경로의 기준은 이전 세션이 아니라 **현재 시점의 실제 상태**입니다.
 
 ~~~text
-Repository
-+ Issue
-+ Workflow
+Repository + Workflow
++ (GitHub Issue | Team Hub Spec/Revision/Stage/Gate | Direct request)
 = Current Source of Truth
 ~~~
 
@@ -39,12 +40,9 @@ Repository
 
 ### Issue
 
-- Goal
-- Scope
-- Acceptance
-- 최신 Owner decision
-- current state
-- relevant recent evidence
+- Issue: Goal / Scope / Acceptance / 최신 Creator 결정 / state / 관련 Evidence
+- Spec: ID / Revision / Stage / Gate / 확정 Plan·설계·UML 버전
+- 직접 작업: 현재 요청의 대상 / 승인 범위 / 완료 조건
 
 ### Workflow
 
@@ -67,7 +65,7 @@ Repository 전체를 먼저 읽지 않습니다.
 
 ## 4. Issue / Recipe partition gate
 
-작업을 잘게 나누기 전에 먼저 기존 계약을 확인합니다.
+Issue/Recipe를 분리하기 전에 기존 계약을 확인합니다. Spec이나 직접 요청을 자동으로 Issue로 승격하지 않습니다.
 
 - 기존 Recipe
 - Parent / Child Issue
@@ -79,6 +77,8 @@ Repository 전체를 먼저 읽지 않습니다.
 새 Issue나 Recipe는 “작업량이 많다”는 이유가 아니라 **독립적인 Goal, Acceptance, lifecycle 또는 재사용 계약이 존재할 때**만 분리합니다.
 
 ## 5. Step execution
+
+먼저 공식 엔진·플랫폼 기능과 기존 구현을 조사합니다. 새로운 추상화는 문제와 이점이 검증될 때만 도입합니다(**Standard First, Simple is Best**).
 
 ~~~text
 Restore current state

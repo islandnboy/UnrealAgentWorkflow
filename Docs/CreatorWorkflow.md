@@ -1,5 +1,7 @@
 # Creator Workflow
 
+현재 작업 경로는 **Issue / Team Hub Spec / 직접 요청**입니다. 동일한 제작·검증 원칙을 공유하지만 기록과 승인 원본은 각기 다릅니다. GPT 계획과 Codex 구현은 자동으로 이어지지 않으며 실제 연결된 도구의 권한에 따릅니다.
+
 Creator Workflow는 **제작자와 Agent가 같은 제작 흐름을 공유하는 방식**을 설명합니다.
 
 여기서 Creator는 특정 직군을 뜻하지 않습니다.  
@@ -46,7 +48,7 @@ Creator Intent
    ↓
 Goal / Scope / Acceptance
    ↓
-Issue / Recipe
+Issue / Spec / Direct request
    ↓
 Agent 또는 Creator Tool 실행
    ↓
