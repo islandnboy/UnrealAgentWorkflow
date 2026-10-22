@@ -80,6 +80,8 @@
 
 `Reference/ProjectSF/{ContextBudgetPolicy,ExecutionObservability}.md`, `Reference/ProjectSF/Rules/Programming.md` 등은 공개용 요약으로, 원본과 글자 단위로 같다고 주장하지 않습니다. 포트폴리오 변경으로 Unreal 코드·게임 에셋·실제 제품 상태를 수정하거나 빌드/PIE를 새로 검증하지 않았습니다.
 
-## 한국어 표기 정비
+## 한국어 표기 정비 (2026-10-22)
+
+공개 포트폴리오의 Markdown 31개 중 **26개 문서**에서 제목·설명·표·도식의 자연어 표현을 한국어 중심으로 정리했습니다. 원본을 그대로 복사한 4개 Snapshot과 이미 한국어 중심으로 작성된 Gateway 배포 참고본 1개는 번역 대상으로 변경하지 않았습니다. 이번 작업은 언어·가독성 정비이며, 제품 구현·검증 상태나 역사적 Evidence를 새로 승인하는 작업이 아닙니다.
 
 공개 포트폴리오의 설명과 제목은 한국어 중심으로 정리합니다. `Creator / AI Agent / Programmer`, 제품·시스템명, API·경로, `PASS`/`NOT_TESTED` 등 기계적 상태값은 원형을 유지할 수 있습니다. **원본 그대로 공개한 네 문서는 번역하지 않고 SHA 일치 상태를 보존합니다.** 번역은 새 구현이나 추가 검증을 의미하지 않습니다.
