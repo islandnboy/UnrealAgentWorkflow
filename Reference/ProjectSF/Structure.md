@@ -1,13 +1,13 @@
-# ProjectSF Structure
+# ProjectSF 저장소 구조
 
-## Entry
+## 진입점
 
 ~~~text
 AGENTS.md
 └─ resolves Workflow / Rule / Skill / Recipe before mutation
 ~~~
 
-## Agent behavior
+## Agent 실행 지침
 
 ~~~text
 AI/
@@ -37,7 +37,7 @@ AI/
    └─ server-bot-verification/
 ~~~
 
-## Runtime
+## 실행 기반
 
 ~~~text
 Tools/AgentPipeline/
@@ -54,7 +54,7 @@ Tools/AgentPipeline/
 Runtime은 자연어 의미를 소유하지 않습니다.  
 Agent가 선택한 Workflow / Step / capability를 구조적으로 검증하고 실제 실행을 지원합니다.
 
-## Production state
+## 제작 상태와 근거
 
 ~~~text
 Production/
@@ -69,13 +69,13 @@ Production/
 - Direct request: 영속 일감이 필요 없는 요청의 범위
 - Docs: 장기 제품·기술·제작 계약
 
-## Codex skill discovery
+## Codex의 Skill 발견
 
 ~~~text
 .agents/skills/<skill-name>/SKILL.md
-            ↓ thin entrypoint
+            ↓ 간결한 진입점
 AI/Skills/<skill-name>/SKILL.md
-            ↓ source of truth
+            ↓ 원본(Source of Truth)
 ~~~
 
 Skill의 실제 절차를 두 위치에 복제하지 않는 것이 원칙입니다.

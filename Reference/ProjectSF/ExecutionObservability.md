@@ -1,22 +1,22 @@
-# Execution Observability — curated public summary
+# 실행 진행·관측 — 공개용 요약
 
-> **Curated summary, not verbatim.** Inspected private ProjectSF `AI/Workflows/ExecutionObservability.md` at `08715c68b04f` (2026-10-22).
+> **원본 그대로 복사한 문서가 아닌 공개용 요약입니다.** 2026-10-22에 ProjectSF `main`(`08715c68b04f`)의 `AI/Workflows/ExecutionObservability.md`를 확인해 정리했습니다.
 
-Progress reporting is a way for the **Creator** to understand what has actually happened and what will happen next, not a compulsory report schema, extra CLI, pause point or new permission boundary.
+진행 보고는 **Creator가 실제 작업 상태와 다음 행동을 파악하도록 하는 수단**입니다. 모든 작업에 고정 보고 양식이나 별도 CLI를 강제하지 않고, 보고 자체가 실행 중단이나 새로운 승인 요청을 뜻하지 않도록 합니다.
 
-## Reporting
+## 진행 보고 원칙
 
-- Start/resume identifies the selected **Issue / Spec / direct request** and actual known state.
-- Report meaningful results and the next approved action; continue within the authorization boundary without requiring a user to type “continue” after each progress report.
-- Distinguish candidate versus **applied** Skill, discovered versus **actually invoked** Tool, and delegated results versus Main's integrated verification.
-- Distinguish tool/build/save success, technical/product validation, Creator acceptance and remote-main publication.
-- If not observed, say `NOT_TESTED` / unknown instead of inventing a status or speedup.
-- Keep secrets, raw logs and hidden reasoning out of traces.
+- 작업을 시작하거나 재개할 때 선택한 **Issue / Spec / 직접 요청**과 확인된 현재 상태를 알립니다.
+- 의미 있는 결과와 다음 실행 행동을 설명합니다. 승인된 범위의 후속 작업은 매번 사용자가 '계속'을 입력하지 않아도 이어갑니다.
+- 후보 Skill과 **실제로 적용한 Skill**, 발견한 도구와 **실제로 호출한 도구**, 위임 결과와 Main의 통합 검증을 구분합니다.
+- 도구 호출·빌드·저장 성공, 기술/제품 검증, Creator 수용, 원격 `main` 반영을 각각 분리해서 보고합니다.
+- 관측하지 못한 결과는 `NOT_TESTED` 또는 미확인으로 표시하며, 검증 상태·성능 향상을 만들어내지 않습니다.
+- 비밀정보, 큰 원시 로그, 숨은 추론을 화면 Trace에 노출하지 않습니다.
 
-A detailed execution trace **may** expose Request/Step, applied Skill, actual Tool, artifact, observed validation and next action. Small reads/edits need no template.
+상세 작업에서는 요청/단계, 적용 Skill, 실제 도구, 산출물, 검증 결과, 다음 행동을 표시할 수 있습니다. 간단한 조회·작은 수정까지 같은 보고 양식으로 강제하지 않습니다.
 
-## Continuation and completion
+## 재개 및 완료 보고
 
-Before resuming, reconcile the latest original Issue or Spec state with the repository/Editor/Evidence; do not trust previous conversation state. A final task summary reports the changed artifact and verified scope, applicable Skill and tools when relevant, outstanding decisions/limitations, and whether publication occurred. A progress update by itself is **neither final completion nor a new approval request**.
+재개할 때는 과거 대화보다 최신 Issue 또는 Spec 원본과 실제 저장소/Editor/Evidence를 대조합니다. 최종 보고에는 수정한 산출물, 검증한 범위, 필요한 경우 적용 Skill과 실행 도구, 미해결 사항, 원격 반영 여부를 명시합니다. **진행 보고는 완료 선언이나 자동 승인 요청이 아닙니다.**
 
-See [TaskExecution source](TaskExecution.md) and [inspection scope](../../Docs/SourceAudit-2026-10-22.md).
+관련 자료: [TaskExecution 원본](TaskExecution.md), [실사 범위](../../Docs/SourceAudit-2026-10-22.md).

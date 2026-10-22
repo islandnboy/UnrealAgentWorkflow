@@ -1,25 +1,27 @@
-# Context Budget Policy — curated public summary
+# 문맥 관리 정책 — 공개용 요약
 
-> **Curated summary, not verbatim.** Inspected private ProjectSF `AI/Workflows/ContextBudgetPolicy.md` at `08715c68b04f` (2026-10-22). The actual source governs ProjectSF; this public excerpt is not an independent execution contract.
+> **원본 그대로 복사한 문서가 아닌 공개용 요약입니다.** 2026-10-22에 비공개 ProjectSF `main`(`08715c68b04f`)의 `AI/Workflows/ContextBudgetPolicy.md`를 확인해 정리했습니다. 실제 ProjectSF의 실행 계약은 원본이 담당합니다.
 
-## Resolve from the current question
+## 현재 문제에 필요한 근거부터 확인
 
-1. Select the current Goal, Scope, Acceptance, decisions and unresolved question from the chosen **Issue / Spec / direct request**.
-2. Read the relevant Docs, applicable area instructions and **selected** Skill. Do not open the entire repository by default.
-3. Stop expanding when evidence answers the current question; expand only for unresolved gaps, contradictions or changed inputs.
-4. Reuse results with identity/revision, evidence reference, valid scope and invalidation conditions.
-5. For migration, re-creation or comparison with a past result, the **historical baseline is relevant**. Inspect the prior source/validation before compressing the working context.
+1. 선택한 **Issue / Spec / 직접 요청**에서 목표(Goal), 범위(Scope), 수용 기준(Acceptance), 기존 결정과 미해결 질문을 확인합니다.
+2. 관련 설계 문서, 해당 영역의 지침, **선택된 Skill**을 읽습니다. 저장소 전체를 습관적으로 읽지 않습니다.
+3. 현재 질문에 답할 근거가 확보되면 탐색을 멈추고, 증거 부족·충돌·입력 변경이 있을 때만 범위를 확장합니다.
+4. 판단을 재사용할 때는 대상의 식별자·Revision, Evidence 참조, 유효 범위와 무효화 조건을 함께 확인합니다.
+5. 기존 결과를 이관·재생성하거나 과거와 비교하는 작업에서는 **과거 기준선 자체가 중요한 근거**입니다. 당시 입력과 검증을 확인한 뒤 작업 문맥을 축소합니다.
 
-## Minimal handoff
+## 단계 전환 시 최소 인계
 
-At meaningful stage boundaries preserve: Goal/Acceptance/authorization, current Step and next action, source commit and relevant dirty changes, Issue or Spec/Revision/document version, affected artifacts, observed validation, pending and stale/untested work. Handoff checkpoints belong to the existing work record/Evidence, not a new permanent state manager. Host-native context compression does not establish that execution ended.
+의미 있는 단계 경계에서는 목표·수용 기준·승인 범위, 현재 단계·다음 행동, 원본 커밋·관련 미반영 변경, Issue 또는 Spec/Revision·문서 버전, 변경 산출물과 관측한 검증 결과, 미완료·미검증 항목을 보존합니다.
 
-## Evidence and cost discipline
+인계 내용은 기존 작업 기록과 Evidence를 활용합니다. 인계를 위해 새로운 영속 상태 관리 시스템을 만들지 않습니다. 모델이 문맥을 압축했다는 사실만으로 실행이 끝난 것은 아닙니다.
 
-- `PASS`, `NOT_TESTED`, stale evidence and Creator acceptance remain distinct. A matching file hash does not prove that a live Editor or service is unchanged.
-- Do not cache authority or live MCP state. Rediscover relevant capabilities after engine, adapter, server or schema changes.
-- Measure tokens, tool calls, re-reading, elapsed time, failed/repeated work and validated outcomes on **comparable tasks** before claiming savings. Unknown host telemetry stays `UNKNOWN`.
-- Avoid duplicating raw tool logs in the context; refer to retained evidence and expand only relevant errors.
-- Efficient reading must not drop required regression checks or negative evidence.
+## 검증 근거와 비용 관리
 
-See [Execution Observability](ExecutionObservability.md), [TaskExecution source](TaskExecution.md), and [inspection scope](../../Docs/SourceAudit-2026-10-22.md).
+- `PASS`, `NOT_TESTED`, 오래된 Evidence와 Creator의 제품 수용은 서로 다른 상태입니다. 파일 해시가 같다고 실행 중인 Editor·서비스 상태까지 같다고 단정하지 않습니다.
+- MCP 기능의 과거 조회 결과를 실행 권한이나 현재 연결 상태로 승계하지 않습니다. Engine, Adapter, Server, Schema가 변경되면 영향을 받는 기능을 다시 확인합니다.
+- 토큰 절감이나 속도 향상은 **비교 가능한 작업**에서 토큰·도구 호출·반복 조회·시간·실패 및 재작업·검증 품질을 함께 측정한 뒤 주장합니다. 호스트가 제공하지 않은 계측값은 `UNKNOWN`입니다.
+- 큰 도구 로그를 통째로 반복 입력하지 않고, 보존된 Evidence를 참조해 필요한 오류 구간만 확인합니다.
+- 문맥 비용을 줄이기 위해 필수 회귀 검증이나 반대 근거를 생략하지 않습니다.
+
+관련 자료: [진행 상태 관측](ExecutionObservability.md), [TaskExecution 원본](TaskExecution.md), [실사 범위](../../Docs/SourceAudit-2026-10-22.md).

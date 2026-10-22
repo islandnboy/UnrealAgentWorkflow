@@ -1,66 +1,85 @@
-# Source inspection and publication boundary — 2026-10-22
+# 원본 실사 및 공개 범위 기록 — 2026-10-22
 
-> Portfolio maintenance audit. This log distinguishes the **repository tree inventory**, **retrieved and inspected text**, **historical evidence referenced**, and **unverified areas**. It is not a claim of end-to-end code review or runtime validation.
+> 포트폴리오 유지보수 실사 기록입니다. **파일 목록을 확인한 범위**, **본문을 조회하고 검토한 범위**, **참고한 과거 Evidence**, **확인하지 못한 범위**를 구분합니다. 전체 코드 검토나 런타임 검증 완료 보고서가 아닙니다.
 
-## Source of truth / pinned revision
+## 원본과 기준 Revision
 
-| Role | Repository | Branch | Revision at inspection | Visibility |
+| 구분 | 저장소 | 브랜치 | 실사 기준 Revision | 공개 상태 |
 | --- | --- | --- | --- | --- |
-| Working source of truth | `islandnboy/ProjectSF` | `main` | `08715c68b04fb6472df941a3dd0fd9d19cac4e49` | Private |
-| Published portfolio before refresh | `islandnboy/UnrealAgentWorkflow` | `main` | `2f5ccf467031cb30a3d4a73313c0a610e692c6f2` | Public |
+| 작업 원본(Source of Truth) | `islandnboy/ProjectSF` | `main` | `08715c68b04fb6472df941a3dd0fd9d19cac4e49` | 비공개 |
+| 갱신 전 포트폴리오 | `islandnboy/UnrealAgentWorkflow` | `main` | `2f5ccf467031cb30a3d4a73313c0a610e692c6f2` | 공개 |
 
-This is a **selected publication snapshot**, not a branch mirror, fork, or independent generic framework. Future ProjectSF changes are not automatically reflected here.
+이 저장소는 **선별한 공개용 Snapshot**입니다. 원본 브랜치의 거울 저장소나 복제 저장소가 아니며, 별도로 재설계한 범용 프레임워크도 아닙니다. ProjectSF의 후속 변경이 자동 반영되지는 않습니다.
 
-## Inventory checked (names, sizes, paths; not a contents review)
+## 파일 목록 확인 범위 (본문 정독과 다름)
 
-- ProjectSF recursive `main` tree was returned without truncation: **17,970 entries**. The code, binary assets, runtime data, documents, and evidence names are mixed in that count; it is **not** a number of reviewed documents.
-- Portfolio recursive `main` tree was returned without truncation: **61 entries**.
-- Inventory inspected by category: `AGENTS.md`, `.agents/skills`, `AI/Rules`, `AI/Skills`, `AI/Workflows`, `Docs/Development/AgentWorkflow`, `Docs/Production/Recipes`, `Docs/Project`, `Docs/Technical`, `Production/Evidence`, `Client/.AI`, `Server/.AI`, `Tools/AgentPipeline`, and public `CaseStudies`, `Docs`, `Reference`, `Samples`.
+- ProjectSF `main`의 전체 트리 **17,970개 항목**을 누락 표시 없이 조회했습니다. 여기에 코드·바이너리·문서·Evidence가 섞여 있으며, 검토한 문서 수를 뜻하지 않습니다.
+- 갱신 전 포트폴리오 `main`의 전체 트리 **61개 항목**을 조회했습니다.
+- 파일 분류·경로를 확인한 범위: `AGENTS.md`, `.agents/skills`, `AI/Rules`, `AI/Skills`, `AI/Workflows`, `Docs/Development/AgentWorkflow`, `Docs/Production/Recipes`, `Docs/Project`, `Docs/Technical`, `Production/Evidence`, `Client/.AI`, `Server/.AI`, `Tools/AgentPipeline`, 공개 저장소의 `CaseStudies`, `Docs`, `Reference`, `Samples`.
 
-## Document content retrieved and inspected
+## 본문을 조회하고 관련 내용을 검토한 범위
 
-**Portfolio existing files:** `README.md`; `Docs/{Architecture,CreatorCentricProduction,CreatorWorkflow,ExecutionModel,ImplementationStatus,MCPExecution,ProductionModel}.md`; `CaseStudies/{AgentDrivenGameProduction,WorldProduction,DesignerProduction,RecipeProduction,UIProduction,ServerProduction,RPCNet,DataForge}.md`; `Reference/ProjectSF/{README,Structure,ContextBudgetPolicy,ExecutionObservability}.md`; `Reference/ProjectSF/Skills/{road-production,ui-production}/SKILL.md`; `Reference/ProjectSF/Recipes/Recipe.template.md`; `Samples/{README,DesignerArtifactSet}.md`. Metadata and selected content/headings were reviewed; this is not a full editorial audit of every paragraph or attached media.
+**갱신 전 공개 포트폴리오:** `README.md`, `Docs/{Architecture,CreatorCentricProduction,CreatorWorkflow,ExecutionModel,ImplementationStatus,MCPExecution,ProductionModel}.md`, `CaseStudies/{AgentDrivenGameProduction,WorldProduction,DesignerProduction,RecipeProduction,UIProduction,ServerProduction,RPCNet,DataForge}.md`, `Reference/ProjectSF/{README,Structure,ContextBudgetPolicy,ExecutionObservability}.md`, `Reference/ProjectSF/Skills/{road-production,ui-production}/SKILL.md`, `Reference/ProjectSF/Recipes/Recipe.template.md`, `Samples/{README,DesignerArtifactSet}.md`. 본문 일부·제목·구조를 검토했으며, 첨부 매체까지 모든 문단을 전수 감수한 것은 아닙니다.
 
-**ProjectSF source documents:** `AGENTS.md`; `AI/Workflows/{CommonAIWorkflow,TaskExecution,ProductionConvergence,ProductionEvolution,ContextBudgetPolicy,ExecutionObservability,SubAgentDelegation}.md`; `AI/Rules/{Programming,VerificationDepth,ResourceProduction,FailureRecovery}.md`; `AI/Skills/{road-production,ui-production,issue-context-sync,discussion-convergence,world-structure,world-validation}/SKILL.md`; `Docs/Project/{Vision,ProjectIntroduction,ProjectOverview}.md`; `Docs/Production/Recipes/{Overview,README,RecipeFormat}.md`; `Docs/Development/AgentWorkflow/{Architecture,MaintenancePolicy,AgentLean,CreatorProductionGuide,SharedProductionGuide,SharedProductionReview,SFTeamHubAgentAPI,SFTeamHubGitHubRelay,WorldMutationGate}.md`; `Docs/Technical/Architecture/GeoWorldProductionArchitecture.md`; `Docs/Production/World/NeoSeoulFoundationComparison.md`; `Production/Evidence/README.md`. Full file responses were retrieved, and relevant sections, rules, headings, and status markers were inspected; long files received **selective inspection**, not a line-by-line certification.
+**ProjectSF 원본 지침·워크플로:** `AGENTS.md`, `AI/Workflows/{CommonAIWorkflow,TaskExecution,ProductionConvergence,ProductionEvolution,ContextBudgetPolicy,ExecutionObservability,SubAgentDelegation}.md`, `AI/Rules/{Programming,VerificationDepth,ResourceProduction,FailureRecovery}.md`, `AI/Skills/{road-production,ui-production,issue-context-sync,discussion-convergence,world-structure,world-validation}/SKILL.md`.
 
-## Additional dated evidence inspected
+**ProjectSF 원본 설계·제작 문서:** `Docs/Project/{Vision,ProjectIntroduction,ProjectOverview}.md`, `Docs/Production/Recipes/{Overview,README,RecipeFormat}.md`, `Docs/Development/AgentWorkflow/{Architecture,MaintenancePolicy,AgentLean,CreatorProductionGuide,SharedProductionGuide,SharedProductionReview,SFTeamHubAgentAPI,SFTeamHubGitHubRelay,WorldMutationGate}.md`, `Docs/Technical/Architecture/GeoWorldProductionArchitecture.md`, `Docs/Production/World/NeoSeoulFoundationComparison.md`, `Production/Evidence/README.md`.
 
-The following **historical text checkpoints** were also retrieved to check interpretation, without rerunning them: `Production/Evidence/Issue-54/District-Expansion-20261008/ClosureReview-20261008/README.md`, `Production/Evidence/Issue-64/CameraDistanceStage4-20261014.md`, `Production/Evidence/Issue-28/MainIntegration-20261007/Result.md`, `Production/Evidence/Issue-62/ValidationReport-20261009.md`, `Production/Evidence/MainIntegration-20261016.md`, and `Docs/Development/AgentWorkflow/Reviews/AgentLeanReview-20260920.md`. Contract text of `AI/Rules/{Programming,VerificationDepth}.md` was further inspected for safe publication. These are scoped checkpoints, not evidence of new-world completion or renewed PASS.
+위 문서들의 반환 본문에서 관련 규칙·설계 방향·검증 상태를 확인했습니다. 긴 문서는 필요한 부분을 **선택적으로 조사**했으며, 모든 줄을 독립 검증한 것이 아닙니다.
 
-## Not inspected / not verified
+## 추가로 확인한 과거 검증 기록
 
-- **Not read:** C++, headers, C#/Python/JS/TS source, scripts, executable runtime, binaries, Unreal `.uasset`/`.umap`, and unpublished local changes. A file tree only confirms presence, not behavior.
-- **Not read in full:** all other source `AI/Skills`, `Docs/Design`, `Docs/Technical`, `Docs/Production/Recipes` templates, historical review documents, per-Issue `Production/Evidence`, GitHub Issue bodies/comments, Team Hub Spec/Revision and Library content. They are neither reproduced nor assumed complete.
-- **Not run:** Unreal Editor/PIE, MCP live calls, tests, builds, runtime deployment, data-bake parity, art/quality review, or Creator acceptance. No new throughput, test pass count, or issue closure is asserted.
-- Existing public PDF and image attachments are **not revalidated as evidence** by this audit. Historical figures remain labelled with their original checkpoint and limits.
-- Nonpublic credentials, tokens, endpoints, operational configuration, unpublished story/design/production inputs and private issue/evidence bodies are **outside publication scope**. Private GitHub links would not be useful to public readers.
+다음 텍스트 기록을 읽어 검증 시점과 주장 범위를 대조했으며, 테스트를 재실행하지는 않았습니다.
 
-## Interpretation for the refresh
+- `Production/Evidence/Issue-54/District-Expansion-20261008/ClosureReview-20261008/README.md`
+- `Production/Evidence/Issue-64/CameraDistanceStage4-20261014.md`
+- `Production/Evidence/Issue-28/MainIntegration-20261007/Result.md`
+- `Production/Evidence/Issue-62/ValidationReport-20261009.md`
+- `Production/Evidence/MainIntegration-20261016.md`
+- `Docs/Development/AgentWorkflow/Reviews/AgentLeanReview-20260920.md`
 
-1. Current source explicitly distinguishes **Issue**, **SF Team Hub Spec**, and **direct task** entry paths. Do not represent the historical Issue-first diagram as compulsory for every task.
-2. **Standard First, Simple is Best** and official engine/tool capabilities come before new custom layers.
-3. Creator owns goal/design/acceptance; AI Agent implements and performs baseline regression; Programmer reviews closed issues **across** systems and returns findings to refactoring, Workflow, Skill, and Guideline.
-4. Tool/build success, technical evidence, Creator acceptance and `main` publication are separate checkpoints.
-5. GIS/NeoSeoul large-world evidence is **historical prototype evidence**; ProjectSF's post-2026-10-14 product direction is a linear exploration action-adventure with a smaller curated world. Historical snapshots should not be relabelled as validation of the new world.
-6. A document calling a capability `UNIMPLEMENTED` or `NOT_TESTED` overrides optimistic portfolio language for that capability.
+공개 가능성 판단을 위해 `AI/Rules/{Programming,VerificationDepth}.md`의 계약 본문도 추가 확인했습니다. 이는 제한된 시점의 검증 근거이며 신규 월드의 완성이나 새 PASS를 의미하지 않습니다.
 
-## Publication / validation checklist
+## 미확인·미검증 범위
 
-- [x] Inspect both main trees and prior portfolio before edits.
-- [x] Separate inspected files from inventory-only and unverified scope.
-- [x] Apply only selected documentation/snapshot updates.
-- [x] Review new public snapshots for obvious credentials/endpoints and preserve private operational instructions outside publication. This is a scoped review, not a security audit.
-- [x] Verify local Markdown **path targets** against the public repository tree (29 Markdown files checked before adding this final rule snapshot); the changed heading-anchor reference was repaired. External destination reachability, full anchor rendering, PDFs and image correctness were not dynamically validated.
-- [x] Read back committed public `main` tree and compare verbatim snapshot blob SHAs; final branch check follows this audit update.
+- **읽지 않음:** C++ 헤더/코드, C#·Python·JavaScript·TypeScript 소스, 실행 스크립트, Unreal `.uasset`·`.umap` 등 바이너리와 로컬 미커밋 변경.
+- **전수 정독하지 않음:** 나머지 `AI/Skills`, `Docs/Design`, `Docs/Technical`, 개별 제작 템플릿, 과거 설계 검토, 각 Issue의 Evidence, GitHub Issue 본문/댓글, Team Hub의 실제 Spec·Revision·Library.
+- **새로 실행하지 않음:** Unreal Editor·PIE, 실시간 MCP 호출, 빌드·테스트, 배포, 데이터 변환 일치 검사, 시각적 품질 검수, Creator 최종 승인.
+- 기존 공개 PDF·이미지의 내용·원본성은 이번 실사에서 다시 검증하지 않았습니다. 수치는 기존 검증 날짜와 한계를 함께 유지합니다.
+- 비공개 인증정보, Token, 서버 운영 설정, 미발행 설계·제작 데이터, 내부 Issue/Evidence 원문은 공개 대상에서 제외했습니다. 비공개 GitHub 경로를 공개 독자가 열 수 있다고 가정하지 않습니다.
 
-This checklist is updated during publication.
-## Publication changes and provenance
+## 이번 갱신의 판단 기준
 
-- 2026-10-22: core portfolio documentation aligned to the current Issue / Spec / direct-request contract; historical GIS world work explicitly labelled as prior prototype evidence.
-- **Verbatim, SHA-equal Git blobs** as of the pinned source commit:
-  - `AI/Workflows/TaskExecution.md` → `Reference/ProjectSF/TaskExecution.md` (`bc132d2580ab88544c5faea0378bf526494cdfcc`)
-  - `AI/Skills/ui-production/SKILL.md` → `Reference/ProjectSF/Skills/ui-production/SKILL.md` (`fb85610c4204791137dbd51947f7ab1c60665999`)
-  - `AI/Skills/road-production/SKILL.md` → `Reference/ProjectSF/Skills/road-production/SKILL.md` (`0b786742cbd62967c855c67e90c24392798bfef1`)
-  - `AI/Rules/VerificationDepth.md` → `Reference/ProjectSF/Rules/VerificationDepth.md` (`4d0fb4098382e41c4e0af8269d80d70633ddda14`)
-- **Curated public explanations:** `Reference/ProjectSF/{ContextBudgetPolicy,ExecutionObservability}.md`, `Reference/ProjectSF/Rules/Programming.md` and the public architectural/case-study documentation. These are not claimed to be byte-for-byte source.
-- Documentation-only publication: no source engine implementation, production mutation, build/PIE, Owner review, or new test results.
+1. 현재 작업 진입 경로는 **Issue / SF Team Hub Spec / 직접 요청**입니다. 과거 Issue 기반 도식을 모든 작업의 필수 조건으로 만들지 않습니다.
+2. **Standard First, Simple is Best.** 공식 엔진·도구의 기능과 기존 구조를 먼저 확인합니다.
+3. **Creator**는 목표·설계·제품 수용을, **AI Agent**는 구현과 기본 회귀 검증을, **Programmer**는 완료 이슈 간 구조·기능 품질 검토와 Workflow/Skill/Guideline 개선을 책임집니다.
+4. Tool/Build 성공, 제품 검증, Creator 수용, 원격 `main` 반영은 서로 다른 확인 단계입니다.
+5. GIS/NeoSeoul 대규모 월드는 **과거 프로토타입 실험**입니다. 2026-10-14 이후의 압축된 선형 탐험형 신규 월드가 검증됐다는 뜻이 아닙니다.
+6. 원본에서 `UNIMPLEMENTED`·`NOT_TESTED`로 표시한 항목을 포트폴리오에서 완료로 승격하지 않습니다.
+
+## 공개 및 검증 작업 결과
+
+- [x] 수정 전에 두 저장소의 `main` 트리와 기존 포트폴리오를 확인했습니다.
+- [x] 실제 본문을 읽은 범위와 목록만 확인한 범위, 미검증 범위를 구분했습니다.
+- [x] 필요한 설명과 선별 Snapshot만 수정했습니다.
+- [x] 새 공개 문서에서 명백한 인증정보·내부 연결 정보를 점검했습니다. 전체 보안 감사와는 다릅니다.
+- [x] 공개 저장소의 Markdown 링크가 가리키는 **파일 경로**를 트리와 대조하고, 제목 변경으로 잘못된 앵커 하나를 수정했습니다.
+- [x] 게시 후 원격 `main`을 다시 읽고 원본 그대로 공개한 지침·스킬의 Git Blob SHA를 대조했습니다.
+- [ ] 외부 링크의 실제 접속, 모든 앵커의 브라우저 렌더링, PDF·이미지 내용의 재검증은 실시하지 않았습니다.
+
+## 공개 산출물과 원본 일치 여부
+
+다음 파일은 기준 시점 ProjectSF에서 **원본을 그대로 선별 복사**했으며 Git Blob SHA가 같습니다.
+
+| ProjectSF 원본 | 공개 Snapshot | Git Blob SHA |
+| --- | --- | --- |
+| `AI/Workflows/TaskExecution.md` | `Reference/ProjectSF/TaskExecution.md` | `bc132d2580ab88544c5faea0378bf526494cdfcc` |
+| `AI/Skills/ui-production/SKILL.md` | `Reference/ProjectSF/Skills/ui-production/SKILL.md` | `fb85610c4204791137dbd51947f7ab1c60665999` |
+| `AI/Skills/road-production/SKILL.md` | `Reference/ProjectSF/Skills/road-production/SKILL.md` | `0b786742cbd62967c855c67e90c24392798bfef1` |
+| `AI/Rules/VerificationDepth.md` | `Reference/ProjectSF/Rules/VerificationDepth.md` | `4d0fb4098382e41c4e0af8269d80d70633ddda14` |
+
+`Reference/ProjectSF/{ContextBudgetPolicy,ExecutionObservability}.md`, `Reference/ProjectSF/Rules/Programming.md` 등은 공개용 요약으로, 원본과 글자 단위로 같다고 주장하지 않습니다. 포트폴리오 변경으로 Unreal 코드·게임 에셋·실제 제품 상태를 수정하거나 빌드/PIE를 새로 검증하지 않았습니다.
+
+## 한국어 표기 정비
+
+공개 포트폴리오의 설명과 제목은 한국어 중심으로 정리합니다. `Creator / AI Agent / Programmer`, 제품·시스템명, API·경로, `PASS`/`NOT_TESTED` 등 기계적 상태값은 원형을 유지할 수 있습니다. **원본 그대로 공개한 네 문서는 번역하지 않고 SHA 일치 상태를 보존합니다.** 번역은 새 구현이나 추가 검증을 의미하지 않습니다.

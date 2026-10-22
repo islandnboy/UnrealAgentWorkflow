@@ -1,6 +1,6 @@
-# Creator Production Recipe — 공통 작성 템플릿
+# Creator 제작 Recipe — 공통 작성 양식
 
-Status: **AUTHORING TEMPLATE / NOT_EXECUTED / NOT A RUNTIME SCHEMA**
+상태: **작성용 양식 / 실행하지 않음 / Runtime Schema가 아님**
 
 ProjectSF의 `Docs/Production/Recipes/RecipeFormat.md` 공통 YAML 작성 양식을 발췌한 공개 참고 자료입니다. 특정 작업의 실제 값·비공개 경로·Issue·실행 Evidence는 포함하지 않습니다.
 

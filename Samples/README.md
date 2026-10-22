@@ -1,10 +1,10 @@
-# Samples
+# 제작 예시
 
 ProjectSF 원본 전체를 복제하지 않고 포트폴리오 이해에 필요한 최소 샘플만 공개합니다.
 
 현재 구조에서 샘플로 보여줄 가치가 있는 대상:
 
-- [Designer Artifact Set](DesignerArtifactSet.md)
+- [Creator 제작 산출물 구성](DesignerArtifactSet.md)
 - Bootstrap / Current Source of Truth trace
 - Workflow / Step transition example
 - Skill resolution example

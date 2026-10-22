@@ -1,21 +1,23 @@
-# Programming Rule — curated public summary
+# 프로그래밍 원칙 — 공개용 요약
 
-> **Curated summary, not verbatim.** Based on private ProjectSF `AI/Rules/Programming.md`, source `main` `08715c68b04f` (2026-10-22). Original file includes project-local dependencies; this excerpt is **not** a separately executable policy.
+> **원본 그대로 복사한 문서가 아닌 공개용 요약입니다.** 2026-10-22 기준 ProjectSF `main`(`08715c68b04f`)의 `AI/Rules/Programming.md`를 참고했습니다. 내부 프로젝트 의존 문맥은 제외했으며 독립 실행 가능한 새로운 정책은 아닙니다.
 
 ## Standard First, Simple is Best
 
-Use the current engine/platform's **official feature and documentation**, established industry practice and existing project responsibilities before adding a helper, manager, service, plugin or framework. Exceptions require a concrete mismatch, trade-off, scope and verifiable benefit. **Simple** means lower overall understanding, modification, verification and operational cost—not merely fewer lines or fewer files.
+새 Helper, Manager, Service, Plugin 또는 Framework를 만들기 전에 현재 엔진·플랫폼의 **공식 기능과 문서**, 검증된 업계 표준, 기존 프로젝트의 책임 경계를 먼저 확인합니다. 다른 방식을 선택해야 한다면 기존 방식이 맞지 않는 이유, 대안의 비용·제약, 변경 범위, 검증 가능한 이점을 설명해야 합니다.
 
-## Inspect before modifying
+**단순함**은 코드 줄 수나 파일 수가 적다는 뜻이 아니라, 이해·변경·검증·운영 비용이 적다는 뜻입니다. 필요한 권한·안전·수명 경계까지 제거하지 않습니다.
 
-- Check current repository status, related diffs, consumers, lifetime, error handling, tests and data ownership.
-- Reuse an existing feature, then extend it, and add a new component only if responsibility boundaries justify it.
-- Keep protocol generation, serialized data and producer/consumer contracts coherent; do not manually edit generated outputs.
-- Preserve user edits and avoid unrelated refactoring or speculative fixes.
-- Address the observed cause, not just the error message; verify meaningful normal, boundary and failure behaviors.
+## 수정 전 확인
 
-## Completion boundaries
+- 현재 저장소 상태와 관련 변경분, 호출·소비 지점, 객체 수명, 오류 처리, 데이터 소유권과 기존 테스트를 살핍니다.
+- 기존 기능 활용 → 기존 구현 확장 → 새 구성요소 추가 순서로 판단합니다.
+- Protocol 생성 결과와 직렬화 데이터, 송신·수신 계약의 정합성을 지킵니다. 생성된 코드만 직접 수정하지 않습니다.
+- 기존 사용자 변경을 보존하고 요청과 무관한 리팩터링·임시 우회 구현을 섞지 않습니다.
+- 오류 메시지만 숨기지 말고 확인된 원인을 해결하고 정상·경계·실패 경로에서 검증합니다.
 
-Build success, test success, actual product behavior, Creator acceptance and publication are different claims. Do not infer `PASS` from implementation alone. Document-only changes get documentation checks rather than mandatory Unreal builds. Publish/commit only within the requested scope.
+## 완료 판정
 
-See [Verification Depth — verbatim source](VerificationDepth.md) and [the inspection boundary](../../../Docs/SourceAudit-2026-10-22.md).
+빌드 성공, 테스트 통과, 실제 제품 동작, Creator 수용, 원격 반영은 별개입니다. 구현했다는 사실만으로 `PASS`를 선언하지 않습니다. 문서 수정에는 필요한 링크·용어·경계 검증을 적용하며 불필요한 Unreal 빌드를 강제하지 않습니다. 커밋·공개는 요청받은 범위에서만 수행합니다.
+
+관련 자료: [검증 깊이 원본](VerificationDepth.md), [실사 범위](../../../Docs/SourceAudit-2026-10-22.md).
