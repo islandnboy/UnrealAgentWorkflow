@@ -1,4 +1,4 @@
-# Creator Recipe Template Case Study
+# Creator 제작 Recipe 양식 사례
 
 ## 제작 문제와 해결
 

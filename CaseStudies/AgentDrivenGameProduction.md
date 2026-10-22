@@ -1,12 +1,12 @@
-# Agent-Driven Game Production 사례
+# AI Agent 기반 게임 제작 사례
 
 **2026-10-14 기준의 과거 제작·검증 Snapshot.** 이 페이지의 이슈 상태, 월드 지표, 검증 시점은 해당 날짜의 자료다. 이후 ProjectSF는 대규모 GIS 기반 NeoSeoul 재현을 신규 월드의 기본 설계로 삼지 않고, 공간을 의도적으로 압축한 선형 탐험형 액션 어드벤처 방향으로 전환했다. 아래 실제 화면·Evidence는 이전 프로토타입의 공학적 사례로만 사용하며 새 월드 제작 완료 근거가 아니다.
 
 Creator가 설계와 완료 기준을 정하고, Agent가 구현과 기본 회귀검증을 수행한 실제 제작 사례를 월드·전투·MetaHuman 영역으로 정리한다. 제작 화면과 데이터·연결 구조를 함께 제시하고, 기술 검증과 Creator 검수·Issue 종료를 구분한다.
 
 ```text
-Creator Design → Agent Implementation → Automated Validation
-→ Creator Acceptance / Issue Closure → Programmer Review → Workflow Improvement
+Creator 설계 → AI Agent 구현 → 자동 검증
+→ Creator 수용 / 이슈 종료 → Programmer 종합 검토 → 제작 공정 개선
 ```
 
 ProjectSF가 제품 구현과 운영 계약의 Source of Truth이며, 이 저장소는 공개용 포트폴리오 Snapshot이다. 개별 기능과 공정 개선의 근거를 프로젝트별 전담 프로그래머 없이 제작하는 장기 목표와 구분한다. 전체 역할 모델은 [Creator-Centric Production Engineering](../Docs/CreatorCentricProduction.md)을 참고한다.

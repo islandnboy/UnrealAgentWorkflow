@@ -1,15 +1,15 @@
-# World Production Case Study
+# 월드 제작 사례
 
-> **Historical prototype case — NeoSeoul/GIS, 2026-10 checkpoints.** The large geographic-world pipeline and measurements below document work performed **before** the 2026-10-14 shift to a smaller, intentionally compressed linear exploration action-adventure. They are **not** proof that the new world, Houdini/procedural authoring strategy, content pipeline or target-platform performance has been implemented or validated. Current gameplay/world design is owned by private ProjectSF; this page preserves the earlier engineering evidence.
+> **과거 프로토타입 사례 — NeoSeoul/GIS, 2026년 10월 검증 기록.** 아래의 대규모 지리 기반 월드 제작 공정과 수치는 2026-10-14 월드 방향 전환 이전의 작업입니다. 신규 월드, Houdini 기반 절차 제작, 콘텐츠 공정이나 목표 플랫폼 성능이 구현·검증됐다는 뜻은 아닙니다. 현재 월드 설계의 원본은 비공개 ProjectSF이며, 여기에는 당시의 기술적 근거만 보존합니다.
 
-## Goal
+## 제작 목표
 
 **당시 프로토타입 목표:** 서울 기반 대규모 World 제작을 한 번의 생성 작업이 아니라 **반복 가능한 Production system**으로 구축합니다.
 
-## Applied pipeline
+## 적용한 제작 흐름
 
 ~~~text
-Approved geographic / authored source (historical GIS prototype)
+승인된 지리·제작 입력 (과거 GIS 프로토타입)
 → canonical production input
 → terrain-production
 → landscape-production
@@ -23,9 +23,9 @@ Approved geographic / authored source (historical GIS prototype)
 
 필요한 Skill만 현재 Step에 조합하며 “World 전부를 처리하는 거대한 Skill” 하나를 두지 않습니다.
 
-## Historical applied examples
+## 과거 적용 사례
 
-### Road
+### 도로
 
 도로 원천에서 editable / regenerable road result를 만들고 다음을 구분합니다.
 
@@ -38,32 +38,32 @@ Approved geographic / authored source (historical GIS prototype)
 
 대표 구간에서 geometry / grounding / junction / persistence를 검증한 뒤 확장합니다.
 
-### Water
+### 수계
 
 Water production 전에 terrain preparation을 별도 책임으로 검증합니다.
 
 ~~~text
-water terrain preparation
-→ verified bed / bank / datum
-→ native river / lake production
-→ depth / bank / connectivity validation
+수계 지형 준비
+→ 검증된 하상 / 호안 / 수위 기준
+→ Native River / Lake 제작
+→ 수심 / 호안 / 연결성 검증
 ~~~
 
 Water actor 생성만으로 완료 처리하지 않고 실제 지형, 수심, 연결, persistence를 확인합니다.
 
-### Validation
+### 검증
 
 대표 검증 대상:
 
-- geometry fidelity
-- grounding
-- connectivity
-- streaming boundary
-- save / reload
-- regeneration safety
-- runtime cost where measured
-- visual readability
-- Owner review when required
+- 형상 정확도
+- 지형 접지
+- 연결성
+- 스트리밍 경계
+- 저장 / 재로드
+- 재생성 시 기존 결과 보호
+- 측정된 범위의 실행 비용
+- 시각적 판독성
+- 필요한 경우 Creator 검수
 
 ## 공간 분할과 레이어 구조
 
@@ -102,12 +102,12 @@ GIS 고도로 만든 Base를 비교·보존 기준으로 두고, 수계 굴착·
 
 World Partition 셀 경계, Landscape proxy 경계, 행정구역 경계와 제작 청크 경계는 각각 추적한다. 저장·로드 관측이 실제 전체 경로의 streaming 품질·메모리·패키지 성능을 인증하는 것은 아니며, 목표 환경에서의 검증은 별도로 남긴다.
 
-## Why this matters
+## 이 사례의 의미
 
 대규모 World 제작에서 AI의 가치가 커지려면 한 번의 생성 품질보다 **입력, 수정, 재생성, 검증, 사람이 이어서 편집하는 흐름**이 유지되어야 합니다.
 
 이 Case Study는 이전 ProjectSF 월드 프로토타입의 제작·검증 계약과 한계를 기록합니다. 신규 월드 구현 상태는 이 페이지에서 추정하지 않습니다.
 
-## Screenshots and workflow example
+## 제작 화면과 작업 흐름
 
 [Agent-Driven Game Production 사례](AgentDrivenGameProduction.md#이전-neoseoul-월드-제작-파이프라인을-실제-지역에-적용)에서 월드 제작 공정, 도로 전후 화면, 지역 rough와 검증 경계를 함께 확인할 수 있습니다.
