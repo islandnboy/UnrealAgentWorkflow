@@ -11,7 +11,7 @@
 | 공정 원본 | ProjectSF AGENTS, CommonAIWorkflow, 실행 아키텍처, 서버 MCP 연결 안내와 실제 Site MCP 인증·작성자·버전 계약 |
 | Hub 현재 상태 | Spec94 Store72 / Revision1 / 플랜v3 / UMLv2 / 구현6개 / 매뉴얼v5 / 정식 VERIFY 2026-10-26 05:17:06 UTC |
 | 실제 사이트 | 플랜·설계·UML·구현·검증·매뉴얼/발행·CURRENT Library의 읽기 전용 탐색·캡처 |
-| 공개 결과물 | 실제 공정 화면7개와 21페이지 PDF. 사용자에게 SF 내용 포함과 저장소 최신화 요청을 확인 |
+| 공개 결과물 | 실제 공정 화면7개와 12페이지 PDF. 사용자에게 SF 내용 포함과 저장소 최신화 요청을 확인 |
 
 ProjectSF 로컬과 Site checkout은 원격 main 포함 증거와 구분합니다. 기존 dirty 자산과 오래된 공개 작업 checkout은 수정하지 않았습니다. 이번 공개 저장소 갱신에서 게임 빌드·Editor·PIE·서버·Hub 회귀 테스트를 새로 실행하지 않았습니다.
 
@@ -34,3 +34,7 @@ SF Team Hub 실제 화면과 해당 Spec 일부는 사용자 승인에 따라 �
 원본 복사 Reference 네 문서와 과거 게임·RPCNet·DataForge 검증 수치를 보존합니다. 서로 다른 checkpoint의 검사 숫자를 합산하지 않습니다. PDF의 원격 기준 SHA는 작성 당시 확인값이며 이 공개 문서 커밋이 제품 구현이나 Spec 발행을 대신하지 않습니다.
 
 공개된 파일별 바이트·SHA-256은 [첨부 자료 목록](../CaseStudies/TeamHubProduction/ArtifactManifest.json)에서 확인할 수 있습니다.
+
+## 포트폴리오 PDF 구성 갱신
+
+초기 공정 설명 중심의 21페이지 PDF를, 설계한 시스템과 해결한 문제·실제 결과 중심의 12페이지 포트폴리오로 다시 구성했습니다. 상세 공정 절차와 화면 원본은 별도 사이트 공정 문서에 유지했습니다. PDF의 사례별 검증 범위와 공통 서버 MCP 결정은 보존했고, DataForge 원본 가이드에서 실제 GUI 화면을 추가했습니다.

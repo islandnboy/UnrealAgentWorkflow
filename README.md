@@ -33,7 +33,7 @@ Creator 목표 / 설계 / Acceptance
 | Agent Workflow | [실행·재개·검증](Docs/ExecutionModel.md) | Issue / Spec / 직접 요청, 최신 원본, 완료 판정 |
 | 제작 사례 | [SF Team Hub 운영 사례](CaseStudies/TeamHubProduction.md) | 공통 서버 MCP, SPEC-74 발행과 SPEC-94 승인 범위 검증 |
 | 공정 화면 | [사이트에서 진행하는 제작 공정](Docs/SFTeamHubWorkflow.md) | 플랜부터 CURRENT Library까지 실제 화면 7개와 단계별 책임·조건 |
-| 포트폴리오 | [Agent Workflow PDF · 21페이지](Docs/Guides/AgentWorkflowPortfolio-20261026.pdf) | 최신 공정·실제 사이트 화면·Unreal 제작·DataForge·RPCNet 사례 |
+| 포트폴리오 | [Agent Workflow PDF · 12페이지](Docs/Guides/AgentWorkflowPortfolio-20261026.pdf) | 설계 판단·문제 해결·실제 결과 중심의 제작·도구·네트워크 사례 |
 | 제작 사례 | [실제 Unreal 제작](CaseStudies/AgentDrivenGameProduction.md) | 검증 기록이 있는 월드·전투·기본 몬스터 제작 단계 |
 | RPCNet | [네트워크 설계 및 검증](CaseStudies/RPCNet.md) | 상용 클라이언트 네트워크 설계 경험을 바탕으로 별도 개발한 통신 프레임워크 |
 | RPCNet 검증 | [실제 서버·클라이언트 통신 검증](CaseStudies/ServerProduction.md) | RPCNet 테스트 목적으로 구성한 Gateway/AS/GS, 로그인·영속 상태·로컬 통신 검증 |
