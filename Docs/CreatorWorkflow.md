@@ -200,7 +200,7 @@ Creator와 Agent가 공유하는 제작 정보는 대화에만 남지 않습니�
 └─ 최종 결정
 ~~~
 
-지속되는 Goal과 판단은 Issue에, 반복 가능한 제작 계약은 Recipe에, 실제 입력과 결과 검증은 Data / Evidence에 남깁니다.
+지속되는 Goal과 판단은 선택한 작업 경로에 남깁니다. Issue 제작은 GitHub, Spec 제작은 Team Hub의 Revision·문서·결정이 원본입니다. 반복 가능한 제작 계약은 Recipe에, 실제 입력과 결과 검증은 Data / Evidence에 남깁니다.
 
 ---
 
@@ -255,3 +255,9 @@ Creator Workflow의 포트폴리오 단위는 “Agent 기능”이 아닙니다
 - 다음 Iteration
 
 이를 통해 **사람과 AI가 별도의 작업자가 아니라 같은 Production Workflow 안에서 결과를 반복 개선한다는 것**을 보여줍니다.
+
+## 10. 서버 MCP로 이어가는 Spec 제작
+
+팀원별 플러그인 배포 대신 공통 SF Team Hub 서버 MCP를 사용합니다. GPT와 플랜·설계를 보완하고, 제작자가 확정·합의를 내린 뒤 로컬·원격 Codex가 같은 Spec ID로 구현을 이어갑니다. 저장·재조회와 실제 계정·환경의 결과를 확인하고, 사람 수락·검증·원격 main·발행을 별도로 기록합니다.
+
+[실제 사이트 화면으로 보는 공정](SFTeamHubWorkflow.md) · [현재 검증 결과](../CaseStudies/TeamHubProduction.md#공통-서버-mcp로-검증한-연결과-재개)

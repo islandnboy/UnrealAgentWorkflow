@@ -2,7 +2,7 @@
 
 **2026-10-22 기준 Snapshot:** ProjectSF `main` `08715c68b04f`. 이는 공개용 설명이며 독립 실행형 프레임워크가 아닙니다. **Standard First, Simple is Best**를 따릅니다.
 
-현재 Agent Workflow의 구조는 ProjectSF에서 실제 운영 중인 Agent Workflow를 기준으로 합니다.
+현재 Agent Workflow의 구조는 ProjectSF에서 실제 운영 중인 Agent Workflow를 기준으로 합니다. 공통 서버 MCP와 현재 Spec 상태는 [2026-10-26 보완 실사](SourceAudit-2026-10-26.md), 실제 화면은 [사이트 공정](SFTeamHubWorkflow.md)을 따릅니다. 아래 구조 설명·원본 복사 Snapshot의 기준일을 일괄 최신으로 바꾸지 않습니다.
 
 ## 1. 저장소 진입점
 
@@ -174,3 +174,19 @@ Production/Evidence
 ~~~
 
 다른 세션에서도 Issue는 최신 GitHub Issue를, Spec은 Team Hub의 실제 ID·Revision을 다시 읽습니다. 기억이나 연결되지 않은 서비스 응답으로 현재 상태를 추측하지 않습니다.
+
+## 7. 공통 서버 MCP와 클라이언트 역할
+
+```text
+개인 GPT / 로컬·원격 Codex
+        ↓ 허용된 계정·도구
+SF Team Hub 서버 MCP
+        ↓ 버전·작성자·권한 검사
+Spec Store / Revision / 문서·결정·Evidence
+        ↓ 실제 결과 재조회
+현재 Stage·Gate / 다음 행동
+```
+
+팀원별 플러그인 배포는 채택하지 않았습니다. 기존 서버 MCP를 공통으로 사용하고 계정별 허용 범위와 작성자 귀속을 확인합니다. GPT는 플랜·설계 협업, Codex는 실제 구현 적합성 검토·제작·검증을 담당합니다. 코드·에셋 구현의 FAIL/PENDING은 설계 생성으로 PASS가 되지 않습니다.
+
+Spec ID로 새 세션에서 현재 상태를 복원하며 최신 버전·결정·필요한 기록을 대조합니다. GPT의 기획 협업에 Codex 전용 부분 조회·토큰 최적화 순서를 강제하지 않습니다. Docs는 사람이 읽는 프로젝트 설명이며 실행 계약·코드의 별도 사본이 되지 않습니다.

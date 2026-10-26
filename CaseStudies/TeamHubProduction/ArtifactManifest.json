@@ -1,0 +1,46 @@
+{
+  "capturedOn": "2026-10-26",
+  "scope": "User-approved SF Team Hub workflow screenshots and portfolio PDF; no state mutation for capture",
+  "files": [
+    {
+      "path": "CaseStudies/TeamHubProduction/01-plan.jpg",
+      "bytes": 143326,
+      "sha256": "f6a1158b636a9ee02a32b74ac9e76fc7dfbfcce503f5c4b9c3623a1d5f04d9e5"
+    },
+    {
+      "path": "CaseStudies/TeamHubProduction/02-design.jpg",
+      "bytes": 133249,
+      "sha256": "77807d151b8e2775bb4f91ce1a6c6b12944ced98524d92cb304d40f41655751c"
+    },
+    {
+      "path": "CaseStudies/TeamHubProduction/03-uml.jpg",
+      "bytes": 148316,
+      "sha256": "8a4ee6adf311c6feeaf66b620d117735fdfe7a9d8e86b0a422d4938e04f9933e"
+    },
+    {
+      "path": "CaseStudies/TeamHubProduction/04-implementation.jpg",
+      "bytes": 152418,
+      "sha256": "b809cdb2552eb18388cb1a3e375b4ce194400a8ad767dc357da367bda13544ed"
+    },
+    {
+      "path": "CaseStudies/TeamHubProduction/05-verification.jpg",
+      "bytes": 135175,
+      "sha256": "9f1eaca30e8b413692f20da5258d467833f6ad432759da6b625de666119f88ca"
+    },
+    {
+      "path": "CaseStudies/TeamHubProduction/06-publication.jpg",
+      "bytes": 146279,
+      "sha256": "7e2eaccf11661a6a1bc73fc645203ae07a815b1cf1cd2db028bc6eb86742e26c"
+    },
+    {
+      "path": "CaseStudies/TeamHubProduction/07-library.jpg",
+      "bytes": 149452,
+      "sha256": "d008d4548cb277db752235ad89bec1602ed79dbd2b05de4644f4cbade7084d7a"
+    },
+    {
+      "path": "Docs/Guides/AgentWorkflowPortfolio-20261026.pdf",
+      "bytes": 7300847,
+      "sha256": "e75b507f5a9d3366ce5ba34013d95b4efdd1b3795dc95d1f9f37c510076c157f"
+    }
+  ]
+}
