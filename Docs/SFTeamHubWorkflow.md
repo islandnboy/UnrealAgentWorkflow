@@ -2,7 +2,7 @@
 
 **2026-10-26 실제 운영 화면.** 팀원 계정별 플러그인 배포 대신 **공통 서버 MCP**를 사용해 GPT·Codex가 같은 Spec을 조회·저장·재조회합니다. 아래는 승인된 기존 계정으로 탐색한 실제 사이트입니다. 저장·합의·구현·발행을 캡처를 위해 재실행하지 않았습니다.
 
-[12페이지 포트폴리오 PDF](Guides/AgentWorkflowPortfolio-20261026.pdf) · [현재 검증 결과와 한계](../CaseStudies/TeamHubProduction.md) · [실사 범위](SourceAudit-2026-10-26.md)
+[9페이지 포트폴리오 PDF](Guides/AgentWorkflowPortfolio-20261026.pdf) · [현재 검증 결과와 한계](../CaseStudies/TeamHubProduction.md) · [실사 범위](SourceAudit-2026-10-26.md)
 
 ## 1. 플랜 작성과 제작자 확정
 
