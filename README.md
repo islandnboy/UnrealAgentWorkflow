@@ -32,8 +32,10 @@ Creator 목표 / 설계 / Acceptance
 | Agent Workflow | [실행·재개·검증](Docs/ExecutionModel.md) | Issue / Spec / 직접 요청, 최신 원본, 완료 판정 |
 | 제작 사례 | [SF Team Hub 운영 사례](CaseStudies/TeamHubProduction.md) | 제작자가 운영·검증한 Issue/Spec 공정, SPEC-74 완료·발행 사례 |
 | 제작 사례 | [실제 Unreal 제작](CaseStudies/AgentDrivenGameProduction.md) | 검증 기록이 있는 월드·전투·기본 몬스터 제작 단계 |
-| RPCNet | [네트워크 설계 및 검증](CaseStudies/RPCNet.md) | Runtime·ProtocolGenerator·Consumer 책임 분리와 Unreal 연동 |
-| Online Server | [서버 구현 사례와 현재 범위](CaseStudies/ServerProduction.md) | Gateway/AS/GS, 영속화, 로그인·접속 흐름, 로컬 검증 |
+| RPCNet | [네트워크 설계 및 검증](CaseStudies/RPCNet.md) | 상용 클라이언트 네트워크 설계 경험을 바탕으로 별도 개발한 통신 프레임워크 |
+| RPCNet 검증 | [실제 서버·클라이언트 통신 검증](CaseStudies/ServerProduction.md) | RPCNet 테스트 목적으로 구성한 Gateway/AS/GS, 로그인·영속 상태·로컬 통신 검증 |
+
+RPCNet은 실제 통신을 시험하기 위해 서버 기반을 직접 구성한 사례입니다. 이 서버는 별도 상용 온라인 서비스 출시 성과가 아니라 **RPCNet 통신 계약과 Unreal 연동의 실제 검증 환경**으로 소개합니다. 상용 프로젝트의 비공개 코드는 공개하지 않습니다.
 
 ## 추가 자료
 

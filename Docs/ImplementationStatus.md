@@ -19,8 +19,8 @@
 | 분야 | 확인된 설계·구현 및 과거 검증 | 남은 범위 |
 | --- | --- | --- |
 | [SF Team Hub](../CaseStudies/TeamHubProduction.md) | **제작 공정 운영·검증**. SPEC-74 R3 CURRENT 발행, 구현 20개 완료·기술 검증 18개 PASS·제작자 수락. 가이드 v3.2의 문서 저장·충돌 처리 사례 | 별도 플러그인 배포·모바일 연결 검증(#93), 후속 설계 개선(#87) |
-| [RPCNet](../CaseStudies/RPCNet.md) | Runtime·Session·Transport·Codec, C# ProtocolGenerator, Consumer Integration. **당시 테스트 37개 및 Unreal 상호운용성 PASS** | 대규모 실서비스 latency/throughput 개선 수치 없음 |
-| [Online Server](../CaseStudies/ServerProduction.md) | Gateway/AS/GS, 영속 Player/World, Local UE Login→PlayerScope. Foundation **52개**, Gateway 배포 **58개** 회귀 PASS는 **서로 다른 검증 시점** | Unreal DS Gameplay replication, Public TLS/WAN UE Client, 운영 HA/RDB 미완료 |
+| [RPCNet](../CaseStudies/RPCNet.md) | 상용 클라이언트 네트워크 설계·구현 경험을 바탕으로 개인 R&D로 개발. Runtime·Session·Transport·Codec, C# ProtocolGenerator, Consumer Integration. **당시 테스트 37개 및 실제 Unreal 상호운용성 PASS** | 상용 프로젝트의 비공개 코드와 분리. 대규모 실서비스 latency/throughput 개선 수치 없음 |
+| [RPCNet 검증 서버](../CaseStudies/ServerProduction.md) | **RPCNet 통신 시험을 목적으로 직접 구축한** Gateway/AS/GS 및 Unreal Client 로컬 연동. Foundation **52개**, Gateway 배포 **58개** 회귀 PASS는 **각각 다른 시점의 검사** | 독립 상용 서버 출시 성과 아님. Unreal DS Gameplay replication, Public TLS/WAN UE Client, 운영 HA/RDB 미완료 |
 | [DataForge](../CaseStudies/DataForge.md) | XLSX DataTable·Unreal Bake/Readback·Server JSON Parity. **당시 Core 25개 PASS** | 고급 타입·실제 모든 제작 소비자 전환 미완료 |
 | [Unreal 제작](../CaseStudies/AgentDrivenGameProduction.md) | 이전 GIS 월드·전투·MetaHuman 제작·저장·PIE 등 영역별 검증 기록 | 신규 압축 월드, 최종 Creator·시각·패키징·성능 수용 별개 |
 

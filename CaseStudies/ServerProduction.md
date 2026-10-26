@@ -1,10 +1,19 @@
-# 온라인 서버 구현·검증 사례
+# RPCNet 통신 검증용 서버 구축 사례
 
-ProjectSF에서 실제로 개발하고 검증 기록을 남긴 **Gateway / Account Server(AS) / Game Server(GS)**의 현재 공개 범위입니다. 설계상 확장 목표와 로컬 환경의 검증 결과를 구분합니다.
+**RPCNet의 실제 Client/Server 통신을 검증하기 위해 구축한 서버 기반**입니다. ProjectSF에서 Gateway / Account Server(AS) / Game Server(GS)를 구현하고 실제 프로세스·Bot·Unreal Client 연동 검증을 수행했습니다. 인증·영속화·배포 등 검증 범위도 단계적으로 확장했지만, 독립적으로 출시한 상용 온라인 서비스가 아니라 **RPCNet 통신 검증에서 시작한 개발 사례**입니다.
+
+목표 아키텍처와 로컬 환경의 실제 구현·검증 결과, 아직 수행하지 않은 운영 검증을 구분합니다.
 
 - 기준: ProjectSF `main` `08715c68b04f` (2026-10-22)
 - 근거: 원본 `Docs/Technical/Server/ServerArchitecture.md`, `GatewayDeploymentDesign.md`, `Docs/Technical/Client/ClientLoginIntegration.md`, `PlayerScopeSubsystem.md` 및 관련 Evidence
 - 이번 공개 문서 정리에서 소스 빌드·서버·Unreal Editor 테스트는 **재실행하지 않음**
+
+## 검증 목표와 적용 범위
+
+- Mock 통신만으로는 확인할 수 없는 실제 TCP 연결, Session 수명 및 패킷 라우팅을 확인합니다.
+- 생성된 Protocol 계약을 서버 Endpoint와 연결하고 실제 Gateway·AS·GS 경로에서 주고받습니다.
+- Unreal Client의 로그인, GS 입장, PlayerScope 적용·맵 이동까지 연동을 확인합니다.
+- 로컬 배포와 영속 상태 검증은 이 통신 기반을 소비하는 확장 시험으로 구분합니다.
 
 ## 구현된 구조
 

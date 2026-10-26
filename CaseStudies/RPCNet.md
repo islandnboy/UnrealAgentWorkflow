@@ -2,7 +2,9 @@
 
 ## 게임 프로젝트 안에서 재사용 가능한 네트워크 기반
 
-RPCNet은 ProjectSF의 Client / Server 통신을 위해 개발했지만, 게임의 Login·Inventory·World 같은 Domain 의미와 분리한 **재사용 가능한 Network Framework**입니다.
+RPCNet은 **상용 Unreal Engine 프로젝트에서 클라이언트 네트워크 전환과 프레임워크를 직접 설계·구현한 경험**을 바탕으로, 개인 ProjectSF에서 별도로 설계·개발한 통신 프레임워크입니다. 원본 상용 코드나 자료를 공개하지 않으며, 이 문서는 ProjectSF의 RPCNet 구현·검증 범위만 다룹니다.
+
+목표는 게임의 Login·Inventory·World 같은 Domain 의미와 분리한 **재사용 가능한 Network Framework**를 구축하고 실제 Client/Server 통신으로 검증하는 것입니다.
 
 핵심 목표는 프로젝트 코드에 socket / packet boilerplate를 반복해서 만들지 않고, **Runtime + Protocol Code Generation + Consumer Integration**의 경계를 명확히 하는 것입니다.
 
@@ -134,9 +136,15 @@ RPCNet은 현재 ProjectSF monorepo 안에 있지만 `RPCNet/`을 독립적인 F
 
 따라서 필요하면 Runtime / Toolchain을 별도 repository나 SDK로 추출할 수 있는 구조를 유지합니다.
 
+## 검증 방법 — 실제 서버 구성
+
+RPCNet을 테스트하기 위해 ProjectSF에 **Gateway / Account Server / Game Server**를 구성했습니다. Mock/Memory Transport 검사와 별개로 실제 TCP 연결, 프로토콜 처리, 로그인·GS 입장, Client 상태 반영을 통합 시험하기 위한 환경입니다.
+
+이후 서버 쪽의 인증·PlayerScope·영속화·연결 분산 등도 구성해 테스트 범위를 확장했습니다. 서버 개발은 별도 상용 서비스 실적이 아니라 **RPCNet의 실제 사용·상호운용성 검증에서 출발한 작업**입니다. 세부 구현·검증 기록은 [통신 검증용 서버 사례](ServerProduction.md)를 참고합니다.
+
 ## 검증 근거
 
-ProjectSF server foundation의 RPCNet 관련 검증 checkpoint에서 다음을 확인했습니다.
+ProjectSF 서버 기반과 실제 Unreal Client 통신의 RPCNet 관련 검증 checkpoint에서 다음을 확인했습니다.
 
 - 안정적인 코드 재생성
 - 생성된 Stub에서 직접 작성한 최종 Endpoint로 연결
@@ -171,4 +179,4 @@ Agent가 새 기능을 구현할 때 Runtime에 Project-specific 의미를 밀�
 
 RPCNet에서 보여주고 싶은 것은 “TCP를 구현했다”가 아닙니다.
 
-**게임 프로젝트에서 반복되는 네트워크 코드를 Framework와 Consumer 계약으로 분리하고, 코드 생성·Runtime·Mock·실제 Client/Server interop까지 하나의 검증 가능한 개발 체계로 만든 것**이 핵심입니다.
+**상용 프로젝트에서 얻은 네트워크 프레임워크 설계 경험을 개인 R&D에서 RPCNet으로 확장하고, 자체 구성한 실제 서버와 Unreal Client의 통신까지 확인했다**는 점입니다. 프레임워크/Consumer 책임 분리와 생성 코드 관리, Mock 및 실제 연결 검증은 그 과정의 구체적인 설계·검증 내용입니다.
