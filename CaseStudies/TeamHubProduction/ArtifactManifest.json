@@ -39,8 +39,13 @@
     },
     {
       "path": "Docs/Guides/AgentWorkflowPortfolio-20261026.pdf",
-      "bytes": 3023125,
-      "sha256": "5e898c9bc13421a72db8f399d3e4126388b66e155fa0b1347c1a90df1eed8cc3"
+      "bytes": 2742234,
+      "sha256": "2716f496e7f9c80a4f98307f51f57c6d218adc7c839c8b103c9417c9acd5a354"
+    },
+    {
+      "path": "CaseStudies/AbilityWorkflow/spec75-teyvat-pie.png",
+      "bytes": 332872,
+      "sha256": "1fc77b01db294f75bdb3a4ec42dc7809c370abb0bba87f2607196a2e07038beb"
     }
   ]
 }

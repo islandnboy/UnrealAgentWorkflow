@@ -32,6 +32,7 @@ Creator 목표 / 설계 / Acceptance
 | Agent Workflow | [구조 및 책임 경계](Docs/Architecture.md) | Workflow·Rule·Skill·Recipe·Runtime·Evidence |
 | Agent Workflow | [실행·재개·검증](Docs/ExecutionModel.md) | Issue / Spec / 직접 요청, 최신 원본, 완료 판정 |
 | 제작 사례 | [SF Team Hub 운영 사례](CaseStudies/TeamHubProduction.md) | 공통 서버 MCP, SPEC-74 발행과 SPEC-94 승인 범위 검증 |
+| 제작 사례 | [SPEC-75 어빌리티 구조 개선](CaseStudies/AbilityWorkflow.md) | 플랜·설계·구현 분할, BP 반복 제작과 실행 검증·CURRENT 발행 |
 | 공정 화면 | [사이트에서 진행하는 제작 공정](Docs/SFTeamHubWorkflow.md) | 플랜부터 CURRENT Library까지 실제 화면 7개와 단계별 책임·조건 |
 | 포트폴리오 | [Agent Workflow PDF · 9페이지](Docs/Guides/AgentWorkflowPortfolio-20261026.pdf) | 원격 개발 실험 → 이슈 기반 레시피 → 플랜·설계·구현 파이프라인의 발전 과정과 적용 사례 |
 | 제작 사례 | [실제 Unreal 제작](CaseStudies/AgentDrivenGameProduction.md) | 검증 기록이 있는 월드·전투·기본 몬스터 제작 단계 |
