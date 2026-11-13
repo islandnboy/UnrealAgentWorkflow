@@ -48,22 +48,21 @@ RPCNet/
 ### Runtime
 
 ~~~text
-NetworkRuntimeSubsystem
-        ↓
-NetworkRuntime
-        ↓
-NetworkSession
-        ↓
-INetworkTransport
-   ├─ TCP
-   ├─ WebSocket
-   ├─ Mock
-   └─ Memory
-        ↓
-Packet Codec / Envelope
+UGameInstance
+└─ UNetworkManagerSubsystem : UGameInstanceSubsystem
+   ├─ FNetworkRuntime
+   │  └─ 세션 핸들 → FNetworkSession
+   │     ├─ INetworkRequestSender
+   │     ├─ Packet Codec / Envelope
+   │     └─ INetworkTransport
+   └─ TCP 세션 생성 경로: FTcpNetworkTransport 생성·종료 관리
 ~~~
 
-Mock / Memory Transport를 Framework 내부에 두어 실제 서버 없이도 상위 Network 흐름을 검증할 수 있습니다.
+`UNetworkManagerSubsystem`이 초기화·종료와 게임 스레드의 펌프를 맡습니다. `FNetworkRuntime`은 세션을 핸들로 관리하고 각 세션을 펌프하며 기본 세션 핸들을 보관합니다. `FNetworkSession`은 요청·응답, 패킷 인코딩·디코딩과 전송을 담당합니다. Codec은 Session에서 사용하며 Transport 뒤의 별도 네트워크 계층이 아닙니다.
+
+ProjectSF의 실제 연결 Handler는 GameInstance에서 `UNetworkManagerSubsystem`을 얻습니다. 월드 입장 요청은 찾은 GS 세션을 생성된 Proxy에 직접 넘깁니다. GS Handler는 세션 준비 시 해당 핸들을 기본 세션으로 지정하고, 해제할 때 같은 핸들이 기본값이면 지웁니다.
+
+Mock·Memory Transport를 이용한 프레임워크 테스트와 ProjectSF Handler의 실제 TCP 연결은 별개입니다.
 
 ### 프로토콜 생성기
 
@@ -152,7 +151,7 @@ ProjectSF 원격 main `ff8e11e89f9d`의 SDK·생성기·Consumer를 기준으로
 
 **인벤토리 적용:** SPEC-95에서 Item 통신과 장비 상태의 책임을 분리했습니다. 아이템 분류는 Shared enum, 착용·해제 요청과 상태는 InventoryModel이 소유합니다. [실제 사례와 발행 상태](GameplayWorkflow-20261113.md#인벤토리와-무기-착용)를 참고하세요.
 
-**11월 후속 변경:** SF 모듈 설치 경로에서 WorldContext로 기본 세션의 요청 발신자를 얻는 Proxy 편의 진입점을 확인했습니다. 기본 세션을 먼저 연결·등록해야 합니다. SDK 원본 전체의 동기화나 RPCNet 전체 신규 회귀를 확인한 결과로 확대하지 않습니다.
+**SF 설치본의 기본 세션 경로:** 인벤토리 호출은 Consumer 객체를 생성된 Item Proxy에 넘깁니다. SF 설치본의 `FNetworkProxyBase` 편의 생성자는 객체의 Outer 체인에서 GameInstance 또는 GameInstanceSubsystem을 찾아 `UNetworkManagerSubsystem`의 기본 세션을 요청 발신자로 얻습니다. 유효한 기본 세션이 없는 상태에서 쓰는 경로는 아닙니다. 대조한 SDK 원본의 Proxy Base에는 발신자를 명시적으로 받는 생성자만 있습니다. 따라서 편의 생성자를 원본 SDK 공통 API로 설명하지 않습니다.
 
 ## 검증 방법 — 실제 서버 구성
 
