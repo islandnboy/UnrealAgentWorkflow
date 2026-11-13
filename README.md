@@ -30,6 +30,8 @@ SF Team Hub의 **Spec ID와 Revision**이 플랜, 설계, 구현 항목, 검증 
 
 ## 더 보기
 
+[**SF 제작자 가이드**](Docs/CreatorWorkflow.md#빠른-시작) · [**RPCNet 적용 가이드**](CaseStudies/RPCNet.md#현재-적용-가이드)
+
 [실제 Hub 화면 7장](Docs/SFTeamHubWorkflow.md) · [구현·검증 현황](Docs/ImplementationStatus.md) · [10월 26일 포트폴리오 PDF](Docs/Guides/AgentWorkflowPortfolio-20261026.pdf)
 
 <details>
