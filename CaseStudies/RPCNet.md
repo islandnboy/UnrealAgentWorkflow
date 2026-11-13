@@ -8,7 +8,7 @@ RPCNet은 **상용 Unreal Engine 프로젝트에서 클라이언트 네트워크
 
 핵심 목표는 프로젝트 코드에 socket / packet boilerplate를 반복해서 만들지 않고, **Runtime + Protocol Code Generation + Consumer Integration**의 경계를 명확히 하는 것입니다.
 
-> 실무 흐름을 그림 중심으로 정리한 포트폴리오 문서: [Protocol → Unreal Client Guide (PDF)](../Docs/Guides/RPCNet_Protocol_to_Unreal_Client_Guide.pdf)
+> [현재 적용 가이드](#현재-적용-가이드) · 이전 구조를 그림으로 설명한 자료: [Protocol → Unreal Client Guide (PDF)](../Docs/Guides/RPCNet_Protocol_to_Unreal_Client_Guide.pdf)
 
 ## 해결하려는 문제
 
@@ -36,7 +36,7 @@ RPCNet/
 │
 ├─ Toolchain/
 │  ├─ ProtocolGenerator
-│  └─ PluginInstaller
+│  └─ SDKInstaller
 │
 └─ Integration/
    └─ ProjectSF
@@ -90,8 +90,8 @@ Generator Core가 Login / Inventory / C2AS 같은 프로젝트 Domain을 하드�
 - 패킷 Envelope / Codec
 - Proxy / Stub 확장 기반
 - 프로토콜 파싱 / 검증 / 코드 생성 기반
-- Unreal Runtime 플러그인
-- 플러그인 설치 도구
+- Unreal Runtime 소스 SDK
+- SDK 설치·일치 검증 도구
 - 프레임워크 책임 경계 검증
 
 ### ProjectSF의 책임
@@ -128,13 +128,31 @@ Protocol Schema
 
 RPCNet은 현재 ProjectSF monorepo 안에 있지만 `RPCNet/`을 독립적인 Framework Boundary로 유지합니다.
 
-- canonical Unreal plugin source는 하나
-- Client plugin copy는 installer output
+- Runtime 원본은 `RPCNet/Runtime/Unreal/RPCNet` 하나입니다.
+- `Client/Source/SF/Network/RPCNet`은 SF 모듈에서 컴파일하는 버전 관리 설치본입니다. `.uproject`에 RPCNet 플러그인을 추가하지 않습니다.
 - framework source에서 Client / Server gameplay code 역참조 금지
 - Project-specific integration은 별도 디렉터리
 - `Validate-Boundary.ps1`로 boundary 검사
 
 따라서 필요하면 Runtime / Toolchain을 별도 repository나 SDK로 추출할 수 있는 구조를 유지합니다.
+
+## 현재 적용 가이드
+
+ProjectSF 원격 main `ff8e11e89f9d`의 SDK·생성기·Consumer를 기준으로 설명합니다.
+
+| 바꾸려는 것 | 수정할 원본 | 변경 후 확인 |
+| --- | --- | --- |
+| Runtime·전송 | RPCNet Runtime SDK | SDKInstaller로 SF 모듈 설치본 갱신 → 원본 일치 → 영향 범위 빌드 |
+| 메시지·공용 타입 | Consumer protobuf 스키마·생성 설정 | DTO·Codec·Proxy·Stub 재생성 → 변경 범위와 재현성 확인 |
+| 게임 상태 | 직접 작성한 Endpoint·Connection·도메인 모델 | 타입이 정해진 요청·수신·상태 적용 검증 |
+
+송신은 Unreal 요청 DTO와 생성된 final Proxy를 사용합니다. 수신 StubBase가 protobuf decode와 DTO 변환을 맡고, 직접 작성한 Endpoint가 Handler에 전달합니다. 연결 전환·재시도·게임 상태는 Consumer 책임입니다. SDK 설치본과 생성물에는 직접 로직을 추가하지 않습니다.
+
+**Shared DTO와 enum**은 서버 C# 타입과 Unreal 값 타입을 같은 스키마에서 생성하는 공용 계약입니다. PlayerScope는 생성된 Shared snapshot 하나를 저장하며, 기존 Blueprint 타입은 읽기용으로 계산합니다.
+
+**인벤토리 적용:** SPEC-95에서 Item 통신과 장비 상태의 책임을 분리했습니다. 아이템 분류는 Shared enum, 착용·해제 요청과 상태는 InventoryModel이 소유합니다. [실제 사례와 발행 상태](GameplayWorkflow-20261113.md#인벤토리와-무기-착용)를 참고하세요.
+
+**11월 후속 변경:** SF 모듈 설치 경로에서 WorldContext로 기본 세션의 요청 발신자를 얻는 Proxy 편의 진입점을 확인했습니다. 기본 세션을 먼저 연결·등록해야 합니다. SDK 원본 전체의 동기화나 RPCNet 전체 신규 회귀를 확인한 결과로 확대하지 않습니다.
 
 ## 검증 방법 — 실제 서버 구성
 
