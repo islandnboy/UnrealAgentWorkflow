@@ -18,11 +18,13 @@ SF Team Hub의 **Spec ID와 Revision**이 플랜, 설계, 구현 항목, 검증 
 
 ## 제작 사례
 
-| 사례 | 볼 수 있는 것 |
+아래 사례는 **같은 Spec 기반 공정을 서로 다른 게임 기능에 적용한 기록**입니다. 화면은 Agent가 구현한 결과를 보여 주고, 구현과 검증의 범위는 Hub의 해당 Revision으로 확인합니다.
+
+| Creator가 넘긴 Spec | Agent가 구현하고 남긴 근거 |
 | --- | --- |
-| [그래플링 이동 · SPEC-105](Docs/SFTeamHubWorkflow.md#기본-그래플링에서-확인한-스펙-실행과-발행) | 하나의 게임 기능이 승인 설계에서 자동화 78/78과 `CURRENT` 발행까지 이어진 과정 |
-| [판교 시작 지역](CaseStudies/PangyoWorldProduction.md) | 지상 광장·도로, 지하 통로·환승부의 제작 화면과 전후 비교. 전체 지역은 제작 중 |
-| [인벤토리와 락온](CaseStudies/GameplayWorkflow-20261113.md) | 실제 게임 화면과 발행 확인 범위. 그래플 자원·HUD 후속 작업은 별도 진행 중 |
+| [SPEC-105 · 그래플링 이동](Docs/SFTeamHubWorkflow.md#기본-그래플링에서-확인한-스펙-실행과-발행) | 승인 설계를 13개 구현 항목으로 연결하고, 검증과 Creator 수용을 거쳐 `CURRENT` 발행 |
+| [SPEC-95 · 인벤토리·무기 착용](CaseStudies/GameplayWorkflow-20261113.md#인벤토리와-무기-착용) | 같은 절차로 UI와 장비 상태 연동을 구현하고, 7개 검증 항목·제품 main 반영·`CURRENT` 발행까지 연결 |
+| [SPEC-99 · 판교 시작 지역](CaseStudies/PangyoWorldProduction.md) | 지상·지하 구간별 제작과 관측을 남긴 진행 중 사례. 발행된 기능 사례와 구분 |
 
 [![판교 광장과 상부 보행 연결부 — Unreal Editor 제작 화면](CaseStudies/PangyoWorldProduction/pangyo-plaza.png)](CaseStudies/PangyoWorldProduction.md)
 
@@ -49,7 +51,7 @@ SF Team Hub의 **Spec ID와 Revision**이 플랜, 설계, 구현 항목, 검증 
 | Spec 공정 | [SF Team Hub 단계별 화면](Docs/SFTeamHubWorkflow.md) | 플랜·UML·구현·검증·발행 화면 7개와 그래플링의 실제 발행 사례 |
 | 포트폴리오 | [10월 26일 Agent Workflow PDF · 9페이지](Docs/Guides/AgentWorkflowPortfolio-20261026.pdf) | 원격 개발 실험 → 이슈 기반 레시피 → 플랜·설계·구현 파이프라인의 발전 과정과 적용 사례 |
 | 현재 월드 | [판교 시작 지역](CaseStudies/PangyoWorldProduction.md) | 광장·도로·지하 동선, 실제 Data Layer 관측과 HLOD 검증 범위 |
-| 게임플레이 | [그래플링과 인벤토리](CaseStudies/GameplayWorkflow-20261113.md) | 그래플 이동·무기 착용·락온 리팩터링 및 후속 자원·HUD 상태 |
+| 게임플레이 | [Spec 기반 Agent 제작 사례](CaseStudies/GameplayWorkflow-20261113.md) | 그래플링과 인벤토리에 적용한 설계 인계·구현·검증·발행 |
 | 초기 제작 이력 | [월드·전투·기본 몬스터](CaseStudies/AgentDrivenGameProduction.md) | 이전 NeoSeoul GIS와 영역별 제작·검증 기록 |
 | RPCNet | [네트워크 설계 및 검증](CaseStudies/RPCNet.md) | 상용 클라이언트 네트워크 설계 경험을 바탕으로 별도 개발한 통신 프레임워크 |
 | RPCNet 검증 | [실제 서버·클라이언트 통신 검증](CaseStudies/ServerProduction.md) | RPCNet 테스트 목적으로 구성한 Gateway/AS/GS, 로그인·영속 상태·로컬 통신 검증 |
