@@ -1,5 +1,7 @@
 # SF Team Hub — Issue 제작에서 Spec 기반 제작으로 확장한 사례
 
+> **2026-11-13 상세 상태:** 기본 그래플링·인벤토리·입력/락온은 `CURRENT` 발행을 확인했습니다. 판교와 그래플 자원·HUD는 구현 중입니다. [Spec별 확인 범위](../Docs/SourceAudit-2026-11-13.md). 아래 공정 화면·수치는 당시 기록입니다.
+
 ProjectSF에서 기존 **GitHub Issue 기반 경량 제작을 유지**하면서, 다자간 기획·설계 합의와 구현·검증·발행이 필요한 작업에 **SF Team Hub Spec 경로**를 도입한 사례입니다.
 
 **2026-10-26 갱신:** 공통 서버 MCP 검증, Spec94의 현재 저장 상태와 실제 사이트 화면을 반영했습니다. ProjectSF 원격 main `a886641a78db`와 현재 운영 기록을 대조했습니다. 기존 SPEC-74/v133 수치는 당시 이력이며, 이번 사이트 캡처는 저장·합의·구현·발행을 재실행한 결과가 아닙니다. [실사 범위](../Docs/SourceAudit-2026-10-26.md) · [실제 공정 화면 7개](../Docs/SFTeamHubWorkflow.md) · [포트폴리오 PDF](../Docs/Guides/AgentWorkflowPortfolio-20261026.pdf)
